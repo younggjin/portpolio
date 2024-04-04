@@ -52,7 +52,9 @@ public class ItemController {
     }
 
     @GetMapping("/item/delivery")
-    public String delivery(){
+    public String delivery(Principal principal){
+        //주문하는 사람
+        //배송 상품 목록
 
         return "/item/delivery";
     }

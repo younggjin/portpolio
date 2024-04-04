@@ -38,7 +38,7 @@
                 </tr>
                 <tr>
                     <td>total price</td>
-                    <td><input type="text" id="total_price" th:value="${#numbers.formatInteger(list.item_price, 0, 'COMMA')}"></td>
+                    <td><input type="text" id="total_price" th:value="${#numbers.formatInteger(list.item_price, 0, 'COMMA')} +'원'"></td>
                 </tr>
                 <tr>
                     <td colspan="2" id="buy_item">
@@ -98,7 +98,7 @@ function count(type){
         var sum_ = number * price;
         var sum_total = sum_.toLocaleString('ko-KR');
 
-        total_price.value = sum_total;
+        total_price.value = sum_total + '원';
 
         resultElement.value = number;
 }

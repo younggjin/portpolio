@@ -1,0 +1,17 @@
+table{
+    margin: 0 auto;
+    align: center;
+    width: 800px;
+}
+.deli_table{
+    text-align: left;
+}
+
+.address1{
+    display: grid;
+    grid-template-columns: 1fr;
+    text-align: left;
+}
+.cash{
+    align: center;
+}

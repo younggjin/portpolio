@@ -23,25 +23,25 @@
             <tr th:each="cart, cartStat : ${cart}">
                 <td>
                     <input type="hidden" id="cart_idx" name="idx" th:value="${cart.idx}">
-                    <input type="checkbox">
+                    <input type="checkbox" name="check" th:value="${cart.idx}" checked="checked">
                 </td>
                 <td>
                     <span th:text="${cart.item_name}"></span>
                     <span th:each="fileName: ${cart.storedFileName}"><img th:src="@{|/thumbnail/${fileName}|}" alt="" style="width:50px;"></span>
                 </td>
-                <td th:id="'price'+${cart.item_idx}" th:text="${#numbers.formatInteger(cart.item_price, '0', 'COMMA')}">금액</td>
+                <td th:id="'price'+${cart.item_idx}" th:text="${#numbers.formatInteger(cart.item_price, '0', 'COMMA')}+'원'">금액</td>
                 <td>
                     <input type="button" value="-" th:onclick="'count(\'minus\', \'quantity' + ${cart.item_idx} + '\', \'price' + ${cart.item_idx} + '\', \'totalPrice' + ${cart.item_idx} + '\')'">
                     <span th:id="'quantity' + ${cart.item_idx}" th:text="${cart.item_quantity}"></span>
                     <input type="button" value="+" th:onclick="'count(\'plus\', \'quantity' + ${cart.item_idx} + '\', \'price' + ${cart.item_idx} + '\', \'totalPrice' + ${cart.item_idx} + '\')'">
 
                 </td>
-                <td th:id="'totalPrice'+${cart.item_idx}" class="price" th:text="${#numbers.formatInteger(cart.item_price * cart.item_quantity, 0, 'COMMA')}"></td>
+                <td th:id="'totalPrice'+${cart.item_idx}" class="price" th:text="${#numbers.formatInteger(cart.item_price * cart.item_quantity, 0, 'COMMA')}+'원'"></td>
                 <td><a th:href="@{/cart/delete/{cart_idx}(cart_idx = ${cart.idx})}">삭제</a></td>
             </tr>
             <tr>
-                <td colspan="5" style="align:right;">총 금액</td>
-                <td id="cartTotalPrice">0</td>
+                <td colspan="4" style="text-align:right; border-right:hidden;">총 금액</td>
+                <td colspan="2" id="cartTotalPrice" style="text-align:right; border-left:hidden;">0</td>
             </tr>
         </table>
         <div>
@@ -61,7 +61,7 @@ var sum = 0;
         sum += parseInt(price[i].innerText.replace(/,/g, ''))
     }
 let cartSum = sum.toLocaleString('ko-KR');
-document.getElementById("cartTotalPrice").innerHTML = cartSum;
+document.getElementById("cartTotalPrice").innerHTML = cartSum + '원';
 
 function count(type, quantityId, priceId, totalPriceId) {
 
@@ -90,7 +90,7 @@ function count(type, quantityId, priceId, totalPriceId) {
     quantity.innerText = item_quantity;
 
     let totalPrice = item_quantity * price;
-    totalPriceElement.innerText = totalPrice.toLocaleString('ko-KR');
+    totalPriceElement.innerText = totalPrice.toLocaleString('ko-KR') + '원';
 
     var price2 = document.getElementsByClassName("price");
     var sum2 = 0;
@@ -99,7 +99,7 @@ function count(type, quantityId, priceId, totalPriceId) {
             sum2 += parseInt(price2[a].innerText.replace(/,/g, ''))
         }
     let cartSum2 = sum2.toLocaleString('ko-KR');
-    document.getElementById("cartTotalPrice").innerHTML = cartSum2;
+    document.getElementById("cartTotalPrice").innerHTML = cartSum2 + '원';
 
     $.ajax({
         url: '/item/cart_modify',
