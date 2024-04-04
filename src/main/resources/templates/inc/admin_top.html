@@ -1,0 +1,28 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<header>
+    <div id="top1">
+        <th:block sec:authorize="hasRole('ADMIN')">
+            <a href="/logout"><span>로그아웃</span></a>
+            <a href="/item/cart"><span>장바구니</span></a>
+            <a href="/item/buy_item"><span>주문조회</span></a>
+            <a href="/member/mypage"><span>마이페이지</span></a>
+            <a href="/admin/mem_list"><span>관리자용</span></a>
+        </th:block>
+    </div>
+    <div id="top2">
+        <div><a href="/"><img src="/images/logo.png" alt="" style="width:30%"></a></div>
+        <div id="top3"><input type="text" name="totalsearch"><button>검색</button></div>
+    </div>
+</header>
+</header>
+<nav>
+    <div id="nav">
+        <a href="/admin/mem_list"><div>회원 목록</div></a>
+        <a href="/admin/category_write"><div>카테고리 등록</div></a>
+        <a href="/admin/item_write"><div>상품 등록</div></a>
+        <a href="/admin/item_list"><div>상품 목록</div></a>
+        <a href="/notice/review"><div>상품사용후기</div></a>
+        <a href="/notice/notice"><div>공지사항</div></a>
+    </div>
+</nav>

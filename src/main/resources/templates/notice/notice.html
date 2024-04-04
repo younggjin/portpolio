@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/top.css">
+    <link rel="stylesheet" type="text/css" href="/css/table.css">
+    <title>공지사항</title>
+</head>
+<body>
+<div th:replace="~{inc/top}"></div>
+<section>
+    <div><h3>공지사항</h3></div>
+    <table border="1">
+        <tr>
+            <th style="width: 10%;">번호</th>
+            <th style="width: 50%;">제목</th>
+            <th style="width: 20%;">작성자</th>
+            <th style="width: 20%;">등록 날짜</th>
+        </tr>
+        <tr>
+            <td>번호</td>
+            <td>제목</td>
+            <td>작성자</td>
+            <td>등록 날짜</td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <a href="/notice/notice_write"><button>글 쓰기</button></a>
+            </td>
+        </tr>
+    </table>
+</section>
+<div th:replace="~{inc/footer}"></div>
+</body>
+</html>

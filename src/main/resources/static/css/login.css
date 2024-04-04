@@ -1,0 +1,11 @@
+#login{
+    margin: 100px 300px 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+#loginbnt{
+    margin: auto auto 5px;
+}
+#item{
+    margin: auto auto 100px;
+}

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/admin_top.css">
+    <link rel="stylesheet" type="text/css" href="/css/item_write.css">
+    <title>제품 등록</title>
+</head>
+<body>
+<div th:replace="~{inc/admin_top}"></div>
+<section>
+    <div><h3>제품 등록</h3></div>
+    <form action="item_write_proc" method="post" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <th style="width: 30%;">카테고리</th>
+            <td>
+                <!-- 대분류 -->
+                <select name="category1" id="category1" onchange="first()">
+                    <option value="0">선택</option>
+                    <th:block th:each="category1 : ${category1}">
+                    <option th:value="${category1.pidx1}">[[${category1.categoryname}]]</option>
+                    </th:block>
+                </select>
+                <!-- 중분류 -->
+                <select name="category2" id="category2" onchange="second()" style="display:none;">
+                    <option value="0">선택</option>
+                </select>
+                <!-- 소분류 -->
+                <select name="category3" id="category3" style="display:none;">
+                    <option value="0">선택</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th>제품명</th>
+            <td colspan="2"><input type="text" name="item_name" style="width: 400px;"></td>
+        </tr>
+        <tr>
+            <th>제품 가격</th>
+            <td colspan="2"><input type="number" name="item_price" style="width: 400px;"></td>
+        </tr>
+        <tr>
+            <th>제품 수량</th>
+            <td colspan="2"><input type="number" name="item_quantity" style="width: 400px;"></td>
+        </tr>
+        <tr>
+            <th>제품 설명</th>
+            <td colspan="2"><textarea name="item_content" style="width: 400px; height: 300px;"></textarea></td>
+        </tr>
+        <tr>
+            <th>제품 사진</th>
+            <td colspan="2">
+                <input type="file" name="mainFile">
+                <br>
+                <input type="file" name="itemFile">
+                <br>
+                <input type="file" name="itemFile">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" style="text-align: center;">
+                <input type="submit" value="제품 등록">
+                <input type="reset" value="다시 쓰기">
+            </td>
+        </tr>
+    </table>
+    </form>
+</section>
+<div th:replace="~{inc/footer}"></div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    function first()
+    {
+        var category1 = document.getElementById('category1').value;
+
+        if(category1 == "0"){ //category1이 선택일 때
+
+            document.getElementById('category2').style.display = "none";
+            document.getElementById('category3').style.display = "none";
+            $("#category2").empty();
+            $('#category2').append($('<option>', {
+                value: "0",
+                text: "선택",
+                selected: true
+            }));
+            $("#category3").empty();
+            $('#category3').append($('<option>', {
+                value: "0",
+                text: "선택",
+                selected: true
+            }));
+
+        }else{ //category1 > category2
+
+            document.getElementById('category2').style.display = "block";
+
+            $.ajax({
+            url: '/admin/category2',
+            type: 'POST',
+            data: { category1: category1 },
+            dataType: 'json',
+            success: function(result) {
+                $('#category2').empty();
+                $('#category2').append($('<option>', {
+                    value: "0",
+                    text: "선택"
+                }));
+                $.each(result, function(index, value) {
+                    $('#category2').append($('<option>', {
+                        value: value.pidx2,
+                        text: value.categoryname
+                    }));
+                });
+            },
+            error: function() {
+                console.log('Failed');
+            }
+        });
+        }
+    }
+    function second(){
+        var category1 = document.getElementById('category1').value;
+        var category2 = document.getElementById('category2').value;
+
+        if(category2 == "0"){
+            document.getElementById('category3').style.display = "none";
+            $('#category3').empty();
+                $('#category3').append($('<option>', {
+                    value: "0",
+                    text: "선택"
+                }));
+        }else{
+            document.getElementById('category3').style.display = "block";
+
+            $.ajax({
+            url: '/admin/category3',
+            type: 'POST',
+            data: { category1: category1, category2 : category2},
+            dataType: 'json',
+            success: function(result) {
+                $('#category3').empty();
+                $('#category3').append($('<option>', {
+                    value: "0",
+                    text: "선택"
+                }));
+                $.each(result, function(index, value) {
+                    $('#category3').append($('<option>', {
+                        value: value.idx,
+                        text: value.categoryname
+                    }));
+                });
+            },
+            error: function() {
+                console.log('Failed');
+            }
+        });
+        }
+    }
+</script>
+</html>

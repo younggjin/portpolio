@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/admin_top.css">
+    <link rel="stylesheet" type="text/css" href="/css/abmin_item_view.css">
+    <title>상품 수정</title>
+</head>
+<body>
+<div th:replace="~{inc/admin_top}"></div>
+<section>
+    <form th:action="@{|/admin/item_modify_proc/${idx}|}" method="post" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <th>상품 번호</th>
+            <td th:text="${list.idx}"><input type="hidden" name="idx" th:value="${list.idx}"></td>
+        </tr>
+        <tr>
+            <th>카테고리</th>
+            <td>
+                <!-- 대분류 -->
+                <select name="category1" id="category1" onchange="first()">
+                    <option value="0">선택</option>
+                        <option th:each="category : ${category1}"
+                                th:value="${category.pidx1}"
+                                th:text="${category.categoryname}"
+                                th:selected="${category.pidx1 == list.category1}"></option>
+
+                </select>
+                <!-- 중분류 -->
+                <select name="category2" id="category2" onchange="second()">
+                    <option value="0">선택</option>
+                    <option th:each="category : ${category2}"
+                            th:value="${category.pidx2}"
+                            th:text="${category.categoryname}"
+                            th:selected="${category.pidx2 == list.category2}"></option>
+                </select>
+                <!-- 소분류 -->
+                <select name="category3" id="category3">
+                    <option value="0">선택</option>
+                    <option th:each="category : ${category3}"
+                            th:value="${category.idx}"
+                            th:text="${category.categoryname}"
+                            th:selected="${category.pidx3 == list.category3}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th>상품명</th>
+            <td>
+                <input type="text" name="item_name" th:value="${list.item_name}"><br>
+            </td>
+        </tr>
+        <tr>
+            <th>상품 금액</th>
+            <td><input type="number" name="item_price" th:value="${list.item_price}"></td>
+        </tr>
+        <tr>
+            <th>수량</th>
+            <td><input type="number" name="item_quantity" th:value="${list.item_quantity}"></td>
+        </tr>
+        <tr>
+            <th>사진</th>
+            <td>
+            <div id="filetable">
+                <div th:each="fileName, fileNameStat : ${list.storedFileName}">
+                    <div th:text="${fileName}"></div>
+                    <input type="checkbox" name="check" onclick="test(this.value)" th:value="check+${fileNameStat.count}">
+                    <input type="checkbox" value="uncheck" th:id="check+${fileNameStat.count}" name="check1" style="display:none" checked>
+                    <input type="file" name="itemFile">
+                    <img th:src="@{|/upload/${fileName}|}" alt="" style="width:100px">
+                </div>
+            </div>
+            </td>
+        </tr>
+        <tr>
+            <th>상세정보</th>
+            <td><textarea name="item_content">[[${list.item_content}]]</textarea></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <a href="/admin/item_list"><input type="button" value="상품 목록"></a>
+                <input type="submit" value="수정완료">
+                <a th:href="@{/admin/item_delete/{idx}(idx=${idx})}"><input type="button" value="삭제"></a>
+            </td>
+        </tr>
+    </table>
+    </form>
+</section>
+<div th:replace="~{inc/footer}"></div>
+</body>
+<script>
+    function test(id){
+        var checkId = id;
+        var result = document.getElementById(checkId).value;
+
+        if(result == "uncheck"){
+            document.getElementById(id).value = "checked";
+        }else{
+            document.getElementById(id).value = "uncheck";
+        }
+    }
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    function first()
+    {
+        var category1 = document.getElementById('category1').value;
+
+        if(category1 == "0"){ //category1이 선택일 때
+
+            $("#category2").empty();
+            $('#category2').append($('<option>', {
+                value: "0",
+                text: "선택",
+                selected: true
+            }));
+            $("#category3").empty();
+            $('#category3').append($('<option>', {
+                value: "0",
+                text: "선택",
+                selected: true
+            }));
+
+        }else{ //category1 > category2
+
+            $.ajax({
+            url: '/admin/category2',
+            type: 'POST',
+            data: { category1: category1 },
+            dataType: 'json',
+            success: function(result) {
+                $('#category2').empty();
+                $('#category2').append($('<option>', {
+                    value: "0",
+                    text: "선택"
+                }));
+                $.each(result, function(index, value) {
+                    $('#category2').append($('<option>', {
+                        value: value.pidx2,
+                        text: value.categoryname
+                    }));
+                });
+                $('#category3').empty();
+                $('#category3').append($('<option>', {
+                    value: "0",
+                    text: "선택"
+                }));
+            },
+            error: function(request, status, error) {
+                console.log('code:'+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
+            }
+        });
+        }
+    }
+    function second(){
+        var category1 = document.getElementById('category1').value;
+        var category2 = document.getElementById('category2').value;
+
+        if(category2 == "0"){
+
+            $('#category3').empty();
+                $('#category3').append($('<option>', {
+                    value: "0",
+                    text: "선택"
+                }));
+        }else{
+
+            $.ajax({
+            url: '/admin/category3',
+            type: 'POST',
+            data: { category1: category1, category2 : category2},
+            dataType: 'json',
+            success: function(result) {
+                $('#category3').empty();
+                $('#category3').append($('<option>', {
+                    value: "0",
+                    text: "선택"
+                }));
+                $.each(result, function(index, value) {
+                    $('#category3').append($('<option>', {
+                        value: value.idx,
+                        text: value.categoryname
+                    }));
+                });
+            },
+            error: function() {
+                console.log('Failed');
+            }
+        });
+        }
+    }
+</script>
+</html>

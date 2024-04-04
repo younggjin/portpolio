@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/top.css">
+    <link rel="stylesheet" type="text/css" href="/css/home.css">
+    <title>홈</title>
+</head>
+<body>
+<div th:replace="~{inc/top}"></div>
+<section>
+    <div>
+        <img src="/images/home.png" style="width: 1000px; margin: 5px auto auto auto;">
+    </div>
+    <div id="notice1">
+        <div id="notice2">
+            상품사용후기
+            <ul>
+                <li>사용사용</li>
+            </ul>
+        </div>
+        <div id="notice3">
+            공지사항
+            <ul>
+                <li>공지공지</li>
+            </ul>
+        </div>
+    </div>
+    <div>
+        <div>제품</div>
+        <div>리스트들</div>
+    </div>
+</section>
+<div th:replace="~{inc/footer}"></div>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/admin_top.css}">
+    <link rel="stylesheet" type="text/css" href="/css/item_write.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>회원목록</title>
+</head>
+<body>
+<div th:replace="~{inc/admin_top}"></div>
+<section>
+    <div><h3>카테고리 등록</h3></div>
+    <form action="/admin/category_proc" method="post">
+        <table>
+            <tr>
+                <th>대분류</th>
+                <td>
+                    <select type="number" name="pidx1" id="category1" onchange="first()">
+                        <option value="none">선택</option>
+                        <option th:if="${first.size} == 0" value="1">대분류 추가</option>
+                        <option th:if="${first.size} != 0" id="add_category1" th:value="${first.get(0).pidx1 + 1}">대분류 추가</option>
+                        <th:block th:each="first : ${first}">
+                            <option th:value="${first.pidx1}">[[${first.categoryname}]]</option>
+                        </th:block>
+                    </select>
+                </td>
+            </tr>
+            <tr id="category2_tr" style="display:none;">
+                <th>중분류</th>
+                <td>
+                    <select type="number" name="pidx2" id="category2" onchange="second()">
+                        <option value="0" selected>선택</option>
+                    </select>
+                </td>
+            </tr>
+            <tr id="category3_tr" style="display:none;">
+                <th>소분류</th>
+                <td>
+                    <select type="number" name="pidx3" id="category3">
+                        <option value="0" selected>선택</option>
+                        <option value="">추가</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>카테고리 이름</th>
+                <td>
+                    <input type="text" name="categoryname">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align:center;">
+                    <input type="submit" value="카테고리 저장">
+                </td>
+            </tr>
+        </table>
+    </form>
+</section>
+<div th:replace="~{inc/footer}"></div>
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script th:inline="javascript">
+    function first() {
+    var category1 = document.getElementById("category1").value;
+    var add = document.getElementById("add_category1").value;
+
+    var tr2 = document.getElementById("category2_tr");
+    var tr3 = document.getElementById("category3_tr");
+
+    if(category1 == "none" || category1 == add)
+    {
+        tr2.style.display = "none";
+        tr3.style.display = "none";
+
+        $('#category2').empty();
+            $('#category2').append($('<option>', {
+                value: "0",
+                text: "선택",
+                selected: true
+            }));
+        $('#category3').empty();
+            $('#category3').append($('<option>', {
+                value: "0",
+                text: "선택",
+                selected: true
+            }));
+    }
+    else if (category1 != "none" && category1 != add)
+    {
+        tr2.style.display = "contents";
+        tr3.style.display = "none";
+
+        $.ajax({
+            url: '/admin/category_first',
+            type: 'POST',
+            data: { category1: category1 },
+            dataType: 'json',
+            success: function(result) {
+                $('#category2').empty();
+                $('#category2').append($('<option>', {
+                    value: "0",
+                    text: "선택"
+                }));
+
+                if (result.length < 1) {
+                    $('#category2').append($('<option>', {
+                        value: 1,
+                        text: "중분류 추가",
+                        id: "add_category2"
+                    }));
+                } else {
+                    $('#category2').append($('<option>', {
+                        value: result[0].pidx2 + 1,
+                        text: "중분류 추가",
+                        id: "add_category2"
+                    }));
+
+                    $.each(result, function(index, value) {
+                        $('#category2').append($('<option>', {
+                            value: value.pidx2,
+                            text: value.categoryname
+                        }));
+                    });
+                }
+            },
+            error: function() {
+                console.log('Failed');
+            }
+        });
+    }
+}
+    function second(){
+        var category1 = document.getElementById("category1").value;
+        var category2 = document.getElementById("category2").value;
+
+        var tr3 = document.getElementById("category3_tr");
+        var add_category2 = document.getElementById("add_category2").value;
+        if(category2 == "0" || category2 == add_category2){
+            tr3.style.display = "none";
+            $('#category3').empty();
+                $('#category3').append($('<option>', {
+                value: "0",
+                text: "선택",
+                selected: true
+            }));
+
+        }else {
+
+            tr3.style.display = "table-row";
+
+            $.ajax({
+            url : '/admin/category_second',
+            type : 'POST',
+            data : {category1 : category1, category2 : category2},
+            dataType : 'json',
+            success : function(result){
+                 $('#category3').empty();
+                     $('#category3').append($('<option>', {
+                        value: "0", // 서버에서 받은 데이터로 옵션 생성
+                        text: "선택"
+                    }));
+                    if(result.length != 0){
+                        $('#category3').append($('<option>', {
+                            value: result[0].pidx3 +1, // 서버에서 받은 데이터로 옵션 생성
+                            text: "소분류 추가"
+                        }));
+                    }else{
+                        $('#category3').append($('<option>', {
+                        value: "1", // 서버에서 받은 데이터로 옵션 생성
+                        text: "소분류 추가"
+                    }));
+                    }
+                    $.each(result, function(index, value) {
+                    $('#category3').append($('<option>', {
+                        value: value.pidx3, // 서버에서 받은 데이터로 옵션 생성
+                        text: value.categoryname
+                    }));
+                });
+            },
+            error: function(){
+                console.log('Failed');
+            }
+            });
+        }
+    }
+</script>
+</html>

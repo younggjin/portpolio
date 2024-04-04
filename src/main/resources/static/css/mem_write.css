@@ -1,0 +1,48 @@
+.writeform{
+    width: 500px;
+    margin: 5px auto;
+}
+.name{
+    margin: 5px;
+    display: grid;
+    grid-template-columns: 150px 1fr 1fr 1fr 1fr 1fr;
+    gap: 10px;
+    text-align: center;
+}
+.address{
+    margin: 5px;
+    display: grid;
+    grid-template-columns: 150px 1fr 1fr;
+    grid-column-gap: 10px;
+    grid-row-gap: 3px;
+    text-align: center;
+    grid-template-areas:
+    "addr post btn"
+    "addr subaddr subaddr"
+    "addr details extra"
+    ;
+}
+.item {
+    grid-area: addr;
+}
+.item2{
+    grid-area: subaddr;
+}
+.radio{
+    margin: 5px;
+    display: grid;
+    grid-template-columns: 150px 30px 30px 30px 50px 1fr;
+    grid-column-gap: 10px;
+    text-align: center;
+}
+.tel{
+    margin: 5px;
+    display: grid;
+    grid-template-columns: 150px 55px 10px 55px 10px 55px;
+    grid-column-gap: 10px;
+    text-align: center;
+}
+.write2{
+    display: grid;
+    grid-template-columns: 150px 1fr 1fr 1fr 1fr 1fr;
+}

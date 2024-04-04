@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/admin_top.css">
+    <link rel="stylesheet" type="text/css" href="/css/table.css">
+    <title>회원목록</title>
+</head>
+<body>
+<div th:replace="~{inc/admin_top}"></div>
+<section>
+    <table>
+        <tr>
+            <th>회원 번호</th>
+            <td th:text="${view.idx}"></td>
+        </tr>
+        <tr>
+            <th>아이디</th>
+            <td th:text="${view.userid}"></td>
+        </tr>
+        <tr>
+            <th>이름</th>
+            <td th:text="${view.name}"></td>
+        </tr>
+        <tr>
+            <th>이메일</th>
+            <td th:text="|${view.mail}@${view.web}|"></td>
+        </tr>
+        <tr>
+            <th>주소</th>
+            <td th:text="|${view.add1} ${view.add2} ${view.add3}|"></td>
+        </tr>
+        <tr>
+            <th>전화번호</th>
+            <td th:text="|${view.tel1}-${view.tel2}-${view.tel3}|"></td>
+        </tr>
+        <tr>
+            <th>예치금</th>
+            <td>
+                [[${#numbers.formatInteger(view.cash, 0, 'COMMA')}]]
+                <br>
+                <input type="number" name="plus_cash">
+            </td>
+        </tr>
+        <tr>
+            <th>등록일</th>
+            <td th:text="${#temporals.format(view.regdate, 'yyyy-MM-dd')}"></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <a href="/admin/mem_list"><input type="button" value="회원 목록"></a>
+                <input type="submit" value="수정 완료">
+                <a th:href="|@{/admin/mem_delete/{idx}(idx=${view.idx})}|"><input type="button" value="회원 삭제"></a>
+            </td>
+        </tr>
+    </table>
+</section>
+<div th:replace="~{inc/footer}"></div>
+</body>
+</html>

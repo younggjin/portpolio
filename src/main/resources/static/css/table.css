@@ -1,0 +1,8 @@
+/*
+cart, admin/item_list,  admin/mem_list, admin/mem_view, notice
+*/
+table{
+    width: 800px;
+    margin: 0 auto 50px auto;
+    border-collapse: collapse;
+}

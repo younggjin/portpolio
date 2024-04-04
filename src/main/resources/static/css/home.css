@@ -1,0 +1,12 @@
+#notice1{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+#notice2{
+    text-align: left;
+    background-color: #B5C0D0;
+}
+#notice3{
+    text-align: left;
+    background-color: #CCD3CA;
+}

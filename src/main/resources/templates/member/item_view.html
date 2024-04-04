@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/top.css">
+    <link rel="stylesheet" type="text/css" href="/css/mem_item_view.css">
+    <title>상품 정보</title>
+</head>
+<body>
+<div th:replace="~{inc/top}"></div>
+<section>
+    <div id="view">
+        <div>
+            <span  class="mySlides" th:each = "fileName: ${list.storedFileName}"><img th:src="@{|/upload/${fileName}|}" alt="" style="width: 350px;"></span>
+            <input type="button" onclick="plusSlides(-1)" value="❮">
+            <input type="button" onclick="plusSlides(1)" value="❯">
+        </div>
+        <div>
+            <form action="/item/item_cart_proc" method="post">
+            <table id="view_table">
+                <input type="hidden" name="item_idx" th:value="${list.idx}">
+                <tr>
+                    <th colspan="2" name="item_name" th:text="${list.item_name}">
+                    </th>
+                </tr>
+                <tr>
+                    <td id="price">가격</td>
+                    <input type="hidden" name="item_price" th:value="${list.item_price}">
+                    <td id="item_price" th:text="${#numbers.formatInteger(list.item_price, 0, 'COMMA')} + '원'"></td>
+                </tr>
+                <tr>
+                    <td id="quantity">수량</td>
+                    <td>
+                        <input type="button" onclick="count('minus')" value="-">
+                        <input type="text" name="item_quantity" id="result" value="1" style="width:50px;" readonly>
+                        <input type="button" onclick="count('plus')" value="+">
+                    </td>
+                </tr>
+                <tr>
+                    <td>total price</td>
+                    <td><input type="text" id="total_price" th:value="${#numbers.formatInteger(list.item_price, 0, 'COMMA')}"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" id="buy_item">
+                        <input type="submit" value="장바구니">
+                        <a href="">바로구매</a>
+                    </td>
+                </tr>
+            </table>
+            </form>
+        </div>
+    </div>
+    <div>상세정보</div>
+    <div>[[${list.item_content}]]</div>
+</section>
+<div th:replace="~{inc/footer}"></div>
+</body>
+<script th:inline="javascript">
+var slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+	slideIndex += n;
+	showSlides(slideIndex);
+}
+
+function showSlides(n) {
+	var i;
+	var slides = document.getElementsByClassName("mySlides");
+
+	if (n > slides.length) {slideIndex = 1;}
+	if (n < 1) {slideIndex = slides.length;}
+	for (i = 0; i < slides.length; i++) {
+		slides[i].style.display = "none";
+	}
+
+	slides[slideIndex-1].style.display = "block";
+}
+
+function count(type){
+    let resultElement = document.getElementById('result');
+    let total_price = document.getElementById('total_price');
+    let item_price = document.getElementById('item_price');
+
+    let number = parseInt(resultElement.value);
+    let price = parseInt(item_price.innerText.replace(/,/g, ''));
+
+    if(type  === 'plus'){
+        number += 1;
+    }else if(type === 'minus'){
+        if(number > 1){
+        number -= 1;
+        }else{
+            alert("1개 이상 선택해 주세요");
+            return;
+        }
+    }
+        var sum_ = number * price;
+        var sum_total = sum_.toLocaleString('ko-KR');
+
+        total_price.value = sum_total;
+
+        resultElement.value = number;
+}
+</script>
+</html>
