@@ -29,7 +29,9 @@ public class DeliveryService {
 
         if (memberEntity != null) {
             return MemberDTO.toMemberDTO(memberEntity);
+        }else{
+            return null;
+
         }
-return null;
     }
 }

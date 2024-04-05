@@ -35,7 +35,7 @@ public class ItemCategoryEntity {
     private String category_name;
 
     //ItemEntity에 categorize_idx
-    @OneToMany(mappedBy = "ItemCategoryEntity", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "itemCategoryEntity", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<ItemEntity> itemEntityList;
 
     public static ItemCategoryEntity itemCategoryEntity(ItemCategoryDTO itemCategoryDTO){

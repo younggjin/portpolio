@@ -95,8 +95,6 @@ public class AdminController {
         int startPage = (((int)(Math.ceil((double)pageable.getPageNumber() / blockLimit))) - 1) * blockLimit + 1;
         int endPage = ((startPage + blockLimit - 1) < itemList.getTotalPages()) ? startPage + blockLimit - 1 : itemList.getTotalPages();
 
-        System.out.println(itemList);
-
         model.addAttribute("list", itemList);
 
         model.addAttribute("startPage", startPage);

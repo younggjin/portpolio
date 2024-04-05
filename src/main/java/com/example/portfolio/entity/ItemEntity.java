@@ -22,7 +22,7 @@ public class ItemEntity extends DateEntity {
     //ItemCategorizeEntity에 idx 연결
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name="categorize_idx")
-    private ItemCategoryEntity ItemCategoryEntity;
+    private ItemCategoryEntity itemCategoryEntity;
 
     @Column
     private String category_idx;

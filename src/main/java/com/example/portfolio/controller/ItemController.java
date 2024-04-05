@@ -2,6 +2,7 @@ package com.example.portfolio.controller;
 
 import com.example.portfolio.dto.CartDTO;
 import com.example.portfolio.service.CartService;
+import com.example.portfolio.service.DeliveryService;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,9 +15,12 @@ import java.util.List;
 public class ItemController {
 
     private final CartService cartService;
+    private final DeliveryService deliveryService;
 
-    public ItemController(CartService cartService) {
+
+    public ItemController(CartService cartService, DeliveryService deliveryService) {
         this.cartService = cartService;
+        this.deliveryService = deliveryService;
     }
 
 
@@ -52,9 +56,13 @@ public class ItemController {
     }
 
     @GetMapping("/item/delivery")
-    public String delivery(Principal principal){
+    public String delivery(Principal principal, Model model){
         //주문하는 사람
+
+        model.addAttribute("memList", deliveryService.findMember(principal));
+
         //배송 상품 목록
+
 
         return "/item/delivery";
     }

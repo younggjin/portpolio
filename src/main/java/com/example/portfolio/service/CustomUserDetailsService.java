@@ -26,7 +26,6 @@ public class CustomUserDetailsService  implements UserDetailsService {
         Optional<MemberEntity> memberEntity = memberRepository.findByUserid(userid);
 
         if(memberEntity != null){
-            //System.out.println(memberEntity.get().getUserid());
             return new CustomUserDetails(memberEntity);
         }
 

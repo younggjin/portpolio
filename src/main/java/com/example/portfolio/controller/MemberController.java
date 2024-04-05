@@ -48,7 +48,6 @@ public class MemberController {
 
     @PostMapping("/member/userid-check")
     public @ResponseBody String useridCheck(@RequestParam(name="userid") String userid){
-        System.out.println("userid = "+userid);
         String checkResult = memberService.useridCheck(userid);
 
         if(checkResult != null){
@@ -110,9 +109,6 @@ public class MemberController {
 
     @GetMapping("/member/mypage/{idx}")
     public String mypage(Model model, @PathVariable(name="idx") Long idx){
-
-        System.out.println(idx);
-
 //        MemberDTO memberDTO = memberService.findById(idx);
 //
 //        model.addAttribute("view", memberDTO);

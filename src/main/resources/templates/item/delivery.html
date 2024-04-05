@@ -13,18 +13,21 @@
     <table>
         <tr>
             <th>이름</th>
-            <td>이름이름</td>
+            <td th:text="${memList.name}"></td>
         </tr>
         <tr>
             <th>전화번호</th>
-            <td>전화번호</td>
+            <td th:text="|${memList.tel1}-${memList.tel2}-${memList.tel3}|"></td>
         </tr>
     </table>
     <h3>배송지</h3>
     <table class="deli_table">
         <tr>
             <th>받는사람</th>
-            <td><input type="text" name="deli_name"></td>
+            <td>
+                <input type="text" name="deliName">
+                <input type="hidden" name="memIdx">
+            </td>
         </tr>
         <tr>
             <th>전화번호</th>
@@ -66,13 +69,17 @@
     <h3>결제 금액</h3>
     <table>
         <tr>
-            <th>결제 수단</th>
-            <td><input type="radio" name="cash">예치금</td>
-        </tr>
-        <tr>
             <th>결제 금액</th>
             <td>금액금액</td>
         </tr>
+        <tr>
+        <th>결제 수단</th>
+        <td>
+            <div class="title">결제 방법</div>
+            <div id="payment-method"></div>
+            <div id="agreement"></div>
+        </td>
+    </tr>
     </table>
     <div class="cash"><input type="button" value="결제"></div>
 </section>
@@ -127,5 +134,19 @@
             }
         }).open();
     }
+</script>
+<script src="https://js.tosspayments.com/v1/payment-widget"></script>
+<script>
+    const clientKey = 'test_ck_D5GePWvyJnrK0W0k6q8gLzN97Eoq' // 상점을 특정하는 키
+    const customerKey = 'YbX2HuSlsC9uVJW6NMRMj' // 결제 고객을 특정하는 키
+    const amount = 15_000 // 결제 금액
+
+    /*결제위젯 영역 렌더링*/
+    const paymentWidget = PaymentWidget(clientKey, customerKey) // 회원 결제 초기화
+    // const paymentWidget = PaymentWidget(clientKey, PaymentWidget.ANONYMOUS) // 비회원 결제 초기화
+    paymentMethods = paymentWidget.renderPaymentMethods('#payment-method', amount)
+
+    /*약관 영역 렌더링*/
+    const paymentAgreement = paymentWidget.renderAgreement('#agreement')
 </script>
 </html>
