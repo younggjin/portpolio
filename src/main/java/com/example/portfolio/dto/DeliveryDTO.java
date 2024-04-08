@@ -4,6 +4,7 @@ import lombok.*;
 import org.hibernate.type.internal.ParameterizedTypeImpl;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -26,7 +27,7 @@ public class DeliveryDTO {
     private String deliveryContent;
 
     //상품 내역
-    private String itemIdx;
+    private List<String> itemIdx;
     private int itemPrice;
     private int quantity;
     private int totalPrice;
