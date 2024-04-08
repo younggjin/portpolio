@@ -9,6 +9,7 @@
 <body>
 <div th:replace="~{inc/top}"></div>
 <section>
+    <form action="/item/delivery" method="get">
     <div><h3>장바구니</h3></div>
     <div>
         <table border="1">
@@ -26,8 +27,8 @@
                     <input type="checkbox" th:id="'check'+${cart.idx}" name="check" th:value="${cart.idx}" checked="checked">
                 </td>
                 <td>
-                    <span th:text="${cart.item_name}"></span>
-                    <span th:each="fileName: ${cart.storedFileName}"><img th:src="@{|/thumbnail/${fileName}|}" alt="" style="width:50px;"></span>
+                    <div th:each="fileName: ${cart.storedFileName}"><img th:src="@{|/thumbnail/${fileName}|}" alt="" style="width:50px;"></div>
+                    <div th:text="${cart.item_name}"></div>
                 </td>
                 <td th:id="'price'+${cart.idx}" th:text="${#numbers.formatInteger(cart.item_price, '0', 'COMMA')}+'원'">금액</td>
                 <td>
@@ -49,19 +50,20 @@
             <a href="/item/delivery"><button>배송/결제</button></a>
         </div>
     </div>
+    </form>
 </section>
 <div th:replace="~{inc/footer}"></div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     var price3 = document.getElementsByClassName("price");
-        var sum = 0;
-            for(var i=0; i<price3.length; i++)
-            {
-                sum += parseInt(price3[i].innerText.replace(/,/g, ''))
-            }
-        let cartSum = sum.toLocaleString('ko-KR');
-        document.getElementById("cartTotalPrice").innerText = cartSum
+    var sum = 0;
+        for(var i=0; i<price3.length; i++)
+        {
+            sum += parseInt(price3[i].innerText.replace(/,/g, ''))
+        }
+    let cartSum = sum.toLocaleString('ko-KR');
+    document.getElementById("cartTotalPrice").innerText = cartSum;
 
         $(document).ready(function(){
             $('input[type="checkbox"]').click(function(){
@@ -80,9 +82,6 @@
             $('#cartTotalPrice').text(totalAmount.toLocaleString('ko-KR')+'원');
 
         };
-
-
-
 
         function count(type, quantityId, priceId, totalPriceId) {
             var cart_idx = Number(document.getElementById('cart_idx').value);

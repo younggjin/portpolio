@@ -21,7 +21,7 @@ public class CartEntity {
     @Setter
     private String userid;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="item_idx")
     @Setter
     private ItemEntity itemEntity;

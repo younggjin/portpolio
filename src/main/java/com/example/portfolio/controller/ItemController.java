@@ -1,17 +1,25 @@
 package com.example.portfolio.controller;
 
 import com.example.portfolio.dto.CartDTO;
+import com.example.portfolio.dto.DeliveryDTO;
 import com.example.portfolio.service.CartService;
 import com.example.portfolio.service.DeliveryService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.print.PrinterGraphics;
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
+@Log4j2
 public class ItemController {
 
     private final CartService cartService;
@@ -55,16 +63,36 @@ public class ItemController {
         return "redirect:/item/cart";
     }
 
+    @RequestMapping()
+    public String cartCheck(Principal principal, @RequestParam List<String> itemId){
+
+        return null;
+    }
+
     @GetMapping("/item/delivery")
-    public String delivery(Principal principal, Model model){
+    public String delivery(Principal principal, Model model, @RequestParam(name="check")List<Long> cartIdx){
+
         //주문하는 사람
 
         model.addAttribute("memList", deliveryService.findMember(principal));
 
         //배송 상품 목록
+        List<CartDTO> cartDTOList = new ArrayList<>();
+        for(int a=0; a< cartIdx.size(); a++) {
+            CartDTO cartDTOLists = deliveryService.findCart(cartIdx.get(a));
+            cartDTOList.add(cartDTOLists);
+        }
+
+        model.addAttribute("cartList", cartDTOList);
 
 
         return "/item/delivery";
+    }
+    @PostMapping("/item/delevery_proc")
+    public String delivery_proc(DeliveryDTO deliveryDTO){
+        log.info(deliveryDTO);
+
+        return "redirect:/item/buy_item";
     }
     @GetMapping("/item/buy_item")
     public String buy_item(){

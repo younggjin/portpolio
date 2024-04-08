@@ -9,8 +9,9 @@
 <body>
 <div th:replace="~{inc/top}"></div>
 <section>
+    <form action="/item/delevery_proc" method="post">
     <h3>주문</h3>
-    <table>
+    <table border="1">
         <tr>
             <th>이름</th>
             <td th:text="${memList.name}"></td>
@@ -21,12 +22,11 @@
         </tr>
     </table>
     <h3>배송지</h3>
-    <table class="deli_table">
+    <table border="1" class="deli_table">
         <tr>
             <th>받는사람</th>
             <td>
                 <input type="text" name="deliName">
-                <input type="hidden" name="memIdx">
             </td>
         </tr>
         <tr>
@@ -41,7 +41,7 @@
         </tr>
         <tr>
             <th>주소</th>
-            <td class="address1">
+            <td>
                 <div>
                 <input type="text" name="add1" id="sample6_postcode" placeholder="우편번호" >
                 <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
@@ -57,20 +57,43 @@
         </tr>
         <tr>
             <th>배송 메세지</th>
-            <td><textarea></textarea></td>
+            <td><textarea name="deliveryContent"></textarea></td>
         </tr>
     </table>
     <h3>배송 상품</h3>
-    <table>
+    <table border="1">
         <tr>
-            <td>상품들 좌라락</td>
+            <th style="width: 5%;"></th>
+            <th style="width: 35%;">상품명</th>
+            <th style="width: 20%;">금액</th>
+            <th style="width: 10%;">수량</th>
+            <th style="width: 20%;">총 금액</th>
+        </tr>
+        <tr th:each="cartList, cartListStat : ${cartList}">
+            <td>
+                <span th:text="${cartListStat.count}"></span>
+                <input type="hidden" name="itemIdx" th:value="${cartList.idx}">
+            </td>
+            <td>
+                <div th:each="fileName: ${cartList.storedFileName}"><img th:src="@{|/thumbnail/${fileName}|}" alt="" style="width:50px; align: left;"></div>
+                <div th:text="${cartList.item_name}"></div>
+            </td>
+            <td name="itemPrice" th:text="${#numbers.formatInteger(cartList.item_price, '0', 'COMMA')}+'원'">금액</td>
+            <td>
+                <span name="quantity" th:text="${cartList.item_quantity}"></span>
+            </td>
+            <td name="totalPrice" class="price" th:text="${#numbers.formatInteger(cartList.item_price * cartList.item_quantity, 0, 'COMMA')}+'원'"></td>
+        </tr>
+        <tr>
+            <td colspan="4" style="text-align:right; border-right:hidden;">총 금액</td>
+            <td colspan="2" id="cartTotalPrice" name="totalPrice" style="text-align:right; border-left:hidden;">0원</td>
         </tr>
     </table>
     <h3>결제 금액</h3>
-    <table>
+    <table border="1">
         <tr>
             <th>결제 금액</th>
-            <td>금액금액</td>
+            <td id="cartTotalPrice2" style="text-align:right">0원</td>
         </tr>
         <tr>
         <th>결제 수단</th>
@@ -81,10 +104,22 @@
         </td>
     </tr>
     </table>
-    <div class="cash"><input type="button" value="결제"></div>
+    <div class="cash"><input type="submit" value="결제"></div>
+    </form>
 </section>
 <div th:replace="~{inc/footer}"></div>
 </body>
+<script>
+    var price = document.getElementsByClassName("price");
+    var sum = 0;
+        for(var i=0; i<price.length; i++)
+        {
+            sum += parseInt(price[i].innerText.replace(/,/g, ''))
+        }
+    let cartSum = sum.toLocaleString('ko-KR');
+    document.getElementById("cartTotalPrice").innerText = cartSum;
+    document.getElementById("cartTotalPrice2").innerText = cartSum
+</script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     function sample6_execDaumPostcode() {

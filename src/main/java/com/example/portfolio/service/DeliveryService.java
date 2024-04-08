@@ -1,17 +1,15 @@
 package com.example.portfolio.service;
 
-import com.example.portfolio.dto.ItemDTO;
+import com.example.portfolio.dto.CartDTO;
 import com.example.portfolio.dto.MemberDTO;
-import com.example.portfolio.entity.ItemEntity;
+import com.example.portfolio.entity.CartEntity;
 import com.example.portfolio.entity.MemberEntity;
 import com.example.portfolio.repository.CartRepository;
 import com.example.portfolio.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class DeliveryService {
@@ -32,6 +30,14 @@ public class DeliveryService {
         }else{
             return null;
 
+        }
+    }
+    public CartDTO findCart(Long cartIdx){
+        CartEntity cart = cartRepository.findById(cartIdx).orElse(null);
+        if(cart != null){
+            return CartDTO.tocartDTO(cart);
+        }else{
+            return null;
         }
     }
 }
