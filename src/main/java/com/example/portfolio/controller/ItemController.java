@@ -2,6 +2,8 @@ package com.example.portfolio.controller;
 
 import com.example.portfolio.dto.CartDTO;
 import com.example.portfolio.dto.DeliveryDTO;
+import com.example.portfolio.entity.BuyEntity;
+import com.example.portfolio.entity.DeliveryEntity;
 import com.example.portfolio.service.CartService;
 import com.example.portfolio.service.DeliveryService;
 import lombok.extern.log4j.Log4j2;
@@ -89,8 +91,11 @@ public class ItemController {
         return "/item/delivery";
     }
     @PostMapping("/item/delevery_proc")
-    public String delivery_proc(DeliveryDTO deliveryDTO){
-        log.info(deliveryDTO);
+    public String delivery_proc(DeliveryDTO deliveryDTO, Principal principal){
+
+        deliveryService.saveBuy(deliveryDTO, principal);
+
+        deliveryService.saveDelivery(deliveryDTO, principal);
 
         return "redirect:/item/buy_item";
     }

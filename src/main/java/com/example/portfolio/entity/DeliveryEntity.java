@@ -1,10 +1,12 @@
 package com.example.portfolio.entity;
 
 import com.example.portfolio.dto.DeliveryDTO;
+import com.example.portfolio.repository.BuyRepository;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -22,7 +24,8 @@ public class DeliveryEntity {
     @Setter
     private String userid;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="buyIdx")
     @Setter
     private BuyEntity buyEntity;
 
@@ -42,18 +45,24 @@ public class DeliveryEntity {
     @Setter
     private String deliveryContent;
 
-    public static DeliveryEntity deliveryEntity(DeliveryDTO deliveryDTO, Principal principal){
+    @Column
+    @Setter
+    private LocalDateTime regDate;
+
+    public static DeliveryEntity saveDeliveryEntity(DeliveryDTO deliveryDTO, Principal principal, BuyEntity buyEntity){
         String address = deliveryDTO.getAdd1()+"@"+deliveryDTO.getAdd2()+"@"+deliveryDTO.getAdd3();
         String tel = deliveryDTO.getTel1()+"-"+deliveryDTO.getTel2()+"-"+deliveryDTO.getTel3();
+
 
         DeliveryEntity deliveryEntity = new DeliveryEntity();
 
         deliveryEntity.setUserid(principal.getName());
-        deliveryEntity.setDeliveryName(deliveryDTO.getDelName());
+        deliveryEntity.setBuyEntity(buyEntity);
+        deliveryEntity.setDeliveryName(deliveryDTO.getDeliName());
         deliveryEntity.setDeliveryAddress(address);
         deliveryEntity.setDeliveryTel(tel);
         deliveryEntity.setDeliveryContent(deliveryDTO.getDeliveryContent());
-
+        deliveryEntity.setRegDate(deliveryDTO.getRegDate());
 
         return deliveryEntity;
     }

@@ -3,6 +3,26 @@ body{
     margin: 0 auto;
     text-align: center;
 }
+.search {
+  position: relative;
+  width: 300px;
+}
+
+#search {
+  width: 100%;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
+#searchImg {
+  position : absolute;
+  width: 17px;
+  top: 10px;
+  right: 0px;
+  margin: 0;
+}
 a{
     color: black;
     text-decoration: none;

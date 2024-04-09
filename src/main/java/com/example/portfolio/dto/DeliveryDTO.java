@@ -14,10 +14,9 @@ import java.util.List;
 public class DeliveryDTO {
 
     private Long idx;
-    private String userid;
 
     //배송 받는 사람 정보
-    private String delName;
+    private String deliName;
     private String tel1;
     private String tel2;
     private String tel3;
@@ -28,9 +27,10 @@ public class DeliveryDTO {
 
     //상품 내역
     private List<String> itemIdx;
-    private int itemPrice;
-    private int quantity;
-    private int totalPrice;
+    private List<String> itemPrice;
+    private List<String> quantity;
+    private List<String> totalPrice;
+
     private LocalDateTime regDate;
 
 

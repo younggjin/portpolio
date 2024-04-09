@@ -1,11 +1,10 @@
 package com.example.portfolio.entity;
 
+import com.example.portfolio.dto.DeliveryDTO;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import java.security.Principal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -20,23 +19,41 @@ public class BuyEntity {
     private Long idx;
 
     @Column
+    @Setter
     private String userid;
 
-    @OneToOne
-    private DeliveryEntity deliveryEntity;
-
     @Column
+    @Setter
     private String itemIdx;
 
     @Column
-    private int itemPrice;
+    @Setter
+    private String itemPrice;
 
     @Column
-    private int quantity;
+    @Setter
+    private String quantity;
 
     @Column
-    private int totalPrice;
+    @Setter
+    private String totalPrice;
 
     @Column
+    @Setter
     private LocalDateTime regDate;
+
+    public static BuyEntity saveBuyEntity(DeliveryDTO deliveryDTO, Principal principal){
+
+        BuyEntity buyEntity = new BuyEntity();
+        for(int a=0; a< deliveryDTO.getItemIdx().size(); a++) {
+            buyEntity.setUserid(principal.getName());
+            buyEntity.setItemIdx(deliveryDTO.getItemIdx().get(a));
+            buyEntity.setItemPrice(deliveryDTO.getItemPrice().get(a));
+            buyEntity.setQuantity(deliveryDTO.getQuantity().get(a));
+            buyEntity.setTotalPrice(deliveryDTO.getTotalPrice().get(a));
+            buyEntity.setRegDate(deliveryDTO.getRegDate());
+        }
+        return buyEntity;
+    }
+
 }

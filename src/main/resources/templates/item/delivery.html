@@ -78,15 +78,23 @@
                 <div th:each="fileName: ${cartList.storedFileName}"><img th:src="@{|/thumbnail/${fileName}|}" alt="" style="width:50px; align: left;"></div>
                 <div th:text="${cartList.item_name}"></div>
             </td>
-            <td name="itemPrice" th:text="${#numbers.formatInteger(cartList.item_price, '0', 'COMMA')}+'원'">금액</td>
             <td>
-                <span name="quantity" th:text="${cartList.item_quantity}"></span>
+                <span th:text="${#numbers.formatInteger(cartList.item_price, '0', 'COMMA')}+'원'"></span>
+                <input type="hidden" name="itemPrice" th:value="${cartList.item_price}">
             </td>
-            <td name="totalPrice" class="price" th:text="${#numbers.formatInteger(cartList.item_price * cartList.item_quantity, 0, 'COMMA')}+'원'"></td>
+            <td>
+                <span th:text="${cartList.item_quantity}"></span>
+                <input type="hidden" name="quantity" th:value="${cartList.item_quantity}">
+            </td>
+            <td>
+                <span class="price" th:text="${#numbers.formatInteger(cartList.item_price * cartList.item_quantity, 0, 'COMMA')}+'원'"></span>
+                <input type="hidden" name="totalPrice" th:value="${cartList.item_price * cartList.item_quantity}">
+            </td>
         </tr>
         <tr>
             <td colspan="4" style="text-align:right; border-right:hidden;">총 금액</td>
-            <td colspan="2" id="cartTotalPrice" name="totalPrice" style="text-align:right; border-left:hidden;">0원</td>
+            <td colspan="2" id="cartTotalPrice" style="text-align:right; border-left:hidden;">0원
+            </td>
         </tr>
     </table>
     <h3>결제 금액</h3>
@@ -118,7 +126,8 @@
         }
     let cartSum = sum.toLocaleString('ko-KR');
     document.getElementById("cartTotalPrice").innerText = cartSum;
-    document.getElementById("cartTotalPrice2").innerText = cartSum
+    document.getElementById("cartTotalPrice2").innerText = cartSum;
+
 </script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>

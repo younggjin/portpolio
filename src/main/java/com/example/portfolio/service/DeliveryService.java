@@ -1,10 +1,15 @@
 package com.example.portfolio.service;
 
 import com.example.portfolio.dto.CartDTO;
+import com.example.portfolio.dto.DeliveryDTO;
 import com.example.portfolio.dto.MemberDTO;
+import com.example.portfolio.entity.BuyEntity;
 import com.example.portfolio.entity.CartEntity;
+import com.example.portfolio.entity.DeliveryEntity;
 import com.example.portfolio.entity.MemberEntity;
+import com.example.portfolio.repository.BuyRepository;
 import com.example.portfolio.repository.CartRepository;
+import com.example.portfolio.repository.DeliveryRepository;
 import com.example.portfolio.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +20,14 @@ import java.util.List;
 public class DeliveryService {
     private final MemberRepository memberRepository;
     private final CartRepository cartRepository;
+    private final DeliveryRepository deliveryRepository;
+    private final BuyRepository buyRepository;
 
-    public DeliveryService(MemberRepository memberRepository, CartRepository cartRepository) {
+    public DeliveryService(MemberRepository memberRepository, CartRepository cartRepository, DeliveryService deliveryService, DeliveryRepository deliveryRepository, BuyRepository buyRepository) {
         this.memberRepository = memberRepository;
         this.cartRepository = cartRepository;
+        this.deliveryRepository = deliveryRepository;
+        this.buyRepository = buyRepository;
     }
 
     public MemberDTO findMember(Principal principal){
@@ -39,5 +48,13 @@ public class DeliveryService {
         }else{
             return null;
         }
+    }
+    public void saveBuy(DeliveryDTO deliveryDTO, Principal principal){
+        buyRepository.save(BuyEntity.saveBuyEntity(deliveryDTO, principal));
+    }
+    public void saveDelivery(DeliveryDTO deliveryDTO, Principal principal){
+        BuyEntity buyEntity = buyRepository.findByUserid(principal.getName());
+        deliveryRepository.save(DeliveryEntity.saveDeliveryEntity(deliveryDTO, principal, buyEntity));
+
     }
 }
