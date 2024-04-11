@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name="buy_table")
-public class BuyEntity {
+public class BuyEntity extends DateEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idx;
@@ -38,9 +38,6 @@ public class BuyEntity {
     @Setter
     private String totalPrice;
 
-    @Column
-    @Setter
-    private LocalDateTime regDate;
 
     public static BuyEntity saveBuyEntity(DeliveryDTO deliveryDTO, Principal principal){
 
@@ -51,7 +48,6 @@ public class BuyEntity {
             buyEntity.setItemPrice(deliveryDTO.getItemPrice().get(a));
             buyEntity.setQuantity(deliveryDTO.getQuantity().get(a));
             buyEntity.setTotalPrice(deliveryDTO.getTotalPrice().get(a));
-            buyEntity.setRegDate(deliveryDTO.getRegDate());
         }
         return buyEntity;
     }

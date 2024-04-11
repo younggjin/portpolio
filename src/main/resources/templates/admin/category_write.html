@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout_admin}"
+      layout:fragment="Content"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/admin_top.css}">
     <link rel="stylesheet" type="text/css" href="/css/item_write.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>회원목록</title>
 </head>
 <body>
-<div th:replace="~{inc/admin_top}"></div>
 <section>
     <div><h3>카테고리 등록</h3></div>
     <form action="/admin/category_proc" method="post">
@@ -51,13 +50,12 @@
             </tr>
             <tr>
                 <td colspan="2" style="text-align:center;">
-                    <input type="submit" value="카테고리 저장">
+                    <input type="submit" class="btn" value="카테고리 저장" >
                 </td>
             </tr>
         </table>
     </form>
 </section>
-<div th:replace="~{inc/footer}"></div>
 </body>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

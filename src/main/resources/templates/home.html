@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}"
+      layout:fragment="Content"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="/css/top.css">
     <link rel="stylesheet" type="text/css" href="/css/home.css">
     <title>홈</title>
 </head>
 <body>
-<div th:replace="~{inc/top}"></div>
 <section>
     <div>
         <img src="/images/home.png" style="width: 1000px; margin: 5px auto auto auto;">
@@ -31,6 +30,5 @@
         <div>리스트들</div>
     </div>
 </section>
-<div th:replace="~{inc/footer}"></div>
 </body>
 </html>

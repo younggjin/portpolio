@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout_admin}"
+      layout:fragment="Content"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="/css/admin_top.css">
     <link rel="stylesheet" type="text/css" href="/css/table.css">
     <title>회원목록</title>
 </head>
 <body>
-<div th:replace="~{inc/admin_top}"></div>
 <section>
     <table>
         <tr>
@@ -55,6 +54,5 @@
         </tr>
     </table>
 </section>
-<div th:replace="~{inc/footer}"></div>
 </body>
 </html>

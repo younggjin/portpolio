@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout_admin}"
+      layout:fragment="Content"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="/css/admin_top.css">
     <link rel="stylesheet" type="text/css" href="/css/item_write.css">
     <title>제품 등록</title>
 </head>
 <body>
-<div th:replace="~{inc/admin_top}"></div>
 <section>
     <div><h3>제품 등록</h3></div>
     <form action="item_write_proc" method="post" enctype="multipart/form-data">
@@ -67,7 +66,6 @@
     </table>
     </form>
 </section>
-<div th:replace="~{inc/footer}"></div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>

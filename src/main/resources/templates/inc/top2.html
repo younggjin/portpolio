@@ -1,0 +1,122 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6" th:fragment="top">
+
+<!--<header>-->
+<!--    <div id="top1">-->
+<!--        <th:block sec:authorize="isAnonymous()">-->
+<!--            <a href="/member/login"><span>로그인</span></a>-->
+<!--            <a href="/member/mem_write"><span>회원가입</span></a>-->
+<!--        </th:block>-->
+<!--        <th:block sec:authorize="hasRole('MEMBER')">-->
+<!--            <a href="/logout"><span>로그아웃</span></a>-->
+<!--            <a href="/item/cart"><span>장바구니</span></a>-->
+<!--            <a href="/item/buy_item"><span>주문조회</span></a>-->
+<!--            <a th:href="@{/member/mypage/{idx}}"><span>마이페이지</span></a>-->
+<!--        </th:block>-->
+<!--        <th:block sec:authorize="hasRole('ADMIN')">-->
+<!--            <a href="/logout"><span>로그아웃</span></a>-->
+<!--            <a href="/item/cart"><span>장바구니</span></a>-->
+<!--            <a href="/item/buy_item"><span>주문조회</span></a>-->
+<!--            <a href="/member/mypage"><span>마이페이지</span></a>-->
+<!--            <a href="/admin/mem_list"><span>관리자용</span></a>-->
+<!--        </th:block>-->
+<!--    </div>-->
+<!--    <div id="top2">-->
+<!--        <div><a href="/"><img src="/images/logo.png" alt="" style="width:30%"></a></div>-->
+<!--        <div id="top3" class="search">-->
+<!--            <input type="text" id="search" placeholder="검색어 입력">-->
+<!--            <img id="searchImg" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</header>-->
+<!--<nav>-->
+<!--    <div id="nav">-->
+<!--            <ul id="category1">-->
+<!--                <li><a href="/member/item_list/0"><div>전체상품</div></a></li>-->
+<!--                <li th:each="category1 : ${first_category}" th:if="${category1.pidx2} == 0">-->
+<!--                    <a><span th:text="${category1.categoryname}"></span></a>-->
+<!--                    <ul id="category2">-->
+<!--                        <li th:each="category2 : ${second_category}" th:if="${category1.pidx1} == ${category2.pidx1} and ${category2.pidx2} != 0 and ${category2.pidx3} == 0">-->
+<!--                            <a><span th:text="${category2.categoryname}"></span></a>-->
+<!--                            <ul id="category3">-->
+<!--                                <li th:each="category3 : ${third_category}" th:if="${category2.pidx1} == ${category3.pidx1} and ${category2.pidx2} == ${category3.pidx2} and ${category3.pidx3} != 0">-->
+<!--                                    <a th:href="@{/member/item_list/{idx}(idx=${category3.idx})}"><span th:text="${category3.categoryname}"></span></a>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </li>-->
+<!--                <li><a href="/notice/review"><div>상품사용후기</div></a></li>-->
+<!--                <li><a href="/notice/notice"><div>공지사항</div></a></li>-->
+<!--            </ul>-->
+<!--    </div>-->
+<!--</nav>-->
+<div class="navigation">
+
+    <nav class="navbar navbar-theme">
+
+        <div class="container">
+
+            <!-- Brand and toggle get grouped for better mobile display -->
+
+
+            <div class="shop-category nav navbar-nav navbar-left">
+
+                <!-- Single button -->
+
+                <div class="btn-group">
+
+                    <button type="button" class="btn btn-shop-category dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                        Shop By Category <span class="caret"></span>
+
+                    </button>
+
+                    <ul class="dropdown-menu">
+
+                        <li><a href="">Men</a></li>
+
+                        <li><a href="">Women</a></li>
+
+                        <li><a href="">Kids</a></li>
+
+                        <li role="separator" class="divider"></li>
+
+                        <li><a href="">Leather</a></li>
+
+                        <li><a href="">Electronics</a></li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+
+            <div class="collapse navbar-collapse" id="navbar">
+
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li><a href="#">Home</a></li>
+
+                    <li><a href="#">Blog</a></li>
+
+                    <li><a href="#">Shortcode</a></li>
+
+                    <li><a href="#">Features</a></li>
+
+                    <li><a href="#">Media</a></li>
+
+                    <li><a href="#">About Us</a></li>
+
+                    <li><a href="#">Contact Us</a></li>
+
+                </ul>
+
+            </div><!-- /.navbar-collapse -->
+
+        </div><!-- /.container-fluid -->
+
+    </nav>
+
+</div>

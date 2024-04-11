@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name="delivery_table")
-public class DeliveryEntity {
+public class DeliveryEntity extends DateEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,10 +45,6 @@ public class DeliveryEntity {
     @Setter
     private String deliveryContent;
 
-    @Column
-    @Setter
-    private LocalDateTime regDate;
-
     public static DeliveryEntity saveDeliveryEntity(DeliveryDTO deliveryDTO, Principal principal, BuyEntity buyEntity){
         String address = deliveryDTO.getAdd1()+"@"+deliveryDTO.getAdd2()+"@"+deliveryDTO.getAdd3();
         String tel = deliveryDTO.getTel1()+"-"+deliveryDTO.getTel2()+"-"+deliveryDTO.getTel3();
@@ -62,7 +58,6 @@ public class DeliveryEntity {
         deliveryEntity.setDeliveryAddress(address);
         deliveryEntity.setDeliveryTel(tel);
         deliveryEntity.setDeliveryContent(deliveryDTO.getDeliveryContent());
-        deliveryEntity.setRegDate(deliveryDTO.getRegDate());
 
         return deliveryEntity;
     }
