@@ -1,241 +1,124 @@
-<!DOCTYPE HTML>
-
-<html lang="en-US">
-
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.84.0">
+    <title>Blog Template · Bootstrap v5.0</title>
 
-    <title>Orani E-Shop</title>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/blog/">
 
-    <!-- Latest compiled and minified CSS -->
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-
-    <!-- Google Font -->
-
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700|Raleway:400,300,500,700,600' rel='stylesheet' type='text/css'>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" type="text/css">
-
-    <!-- Theme Stylesheet -->
-
-    <link rel="stylesheet" href="css/style.css">
-
-    <link rel="stylesheet" href="css/responsive.css">
-
+    <!-- Custom styles for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!--공통 CSS 선언-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/blog.css" />
+    <link rel="stylesheet" href="/css/top.css" />
+    <link rel="stylesheet" type="text/css" href="/css/home.css">
 </head>
-
 <body>
 
-<div class="top-bar">
-
-    <div class="container">
-
-        <div class="row">
-
-            <div class="col-md-6">
-
-                <div class="social pull-left">
-
-                    <ul>
-
-                        <li><a href=""><i class="fa fa-facebook"></i></a></li>
-
-                        <li><a href=""><i class="fa fa-twitter"></i></a></li>
-
-                        <li><a href=""><i class="fa fa-google-plus"></i></a></li>
-
-                        <li><a href=""><i class="fa fa-linkedin"></i></a></li>
-
-                    </ul>
-
-                </div>
-
+<div class="container">
+    <header class="blog-header py-3">
+        <div class="row flex-nowrap justify-content-between align-items-center">
+            <div class="col-4 pt-1">
+                <a href="/"><img src="/images/logo.png" alt="" style="width:30%"></a>
             </div>
-
-            <div class="col-md-6">
-
-                <div class="action pull-right">
-
-                    <ul>
-
-                        <li><a href=""><i class="fa fa-user"></i> Login</a></li>
-
-                        <li><a href=""><i class="fa fa-lock"></i> Register</a></li>
-
-                    </ul>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-<div class="header">
-
-    <div class="container">
-
-        <div class="row">
-
-            <div class="col-md-3 col-sm-4">
-
-                <div class="logo">
-
-                    <a href="index.html">
-
-                        <img src="images/logo.png" alt="Orani E-shop">
-
-                    </a>
-
-                </div>
-
-            </div>
-
-            <div class="col-md-7 col-sm-5">
-
-                <div class="search-form">
-
-                    <form class="navbar-form" role="search">
-
-                        <div class="form-group">
-
-                            <input type="text" class="form-control" placeholder="What do you need...">
-
-                        </div>
-
-                        <button type="submit" class="btn"><i class="fa fa-search"></i></button>
-
-                    </form>
-
-                </div>
-
-            </div>
-
-            <div class="col-md-2 col-sm-3">
-
-                <div class="cart">
-
-                    <div class="cart-icon">
-
-                        <a href=""><i class="fa fa-shopping-cart"></i></a>
-
-                    </div>
-
-                    <div class="cart-text">
-
-                        SHOPPING CART
-
-                        <br>
-
-                        0 items - $0.00
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-<div class="navigation">
-
-    <nav class="navbar navbar-theme">
-
-        <div class="container">
-
-            <!-- Brand and toggle get grouped for better mobile display -->
-
-            <div class="navbar-header">
-
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-
-                    <span class="sr-only">Menu</span>
-
-                    <span class="icon-bar"></span>
-
-                    <span class="icon-bar"></span>
-
-                    <span class="icon-bar"></span>
-
+            <div class="col-4 text-center" style="display:grid; grid-template-columns:1fr 0.1fr;">
+                <input type="text" class="search" placeholder="검색어 입력">
+                <button type="button" class="btn btn-secondary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                    </svg>
                 </button>
-
             </div>
-
-            <div class="shop-category nav navbar-nav navbar-left">
-
-                <!-- Single button -->
-
-                <div class="btn-group">
-
-                    <button type="button" class="btn btn-shop-category dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-                        Shop By Category <span class="caret"></span>
-
-                    </button>
-
-                    <ul class="dropdown-menu">
-
-                        <li><a href="">Men</a></li>
-
-                        <li><a href="">Women</a></li>
-
-                        <li><a href="">Kids</a></li>
-
-                        <li role="separator" class="divider"></li>
-
-                        <li><a href="">Leather</a></li>
-
-                        <li><a href="">Electronics</a></li>
-
-                    </ul>
-
-                </div>
-
+            <div class="col-4 d-flex justify-content-end align-items-center">
+                <th:block sec:authorize="isAnonymous()">
+                    <a class="btn btn-sm btn-outline-secondary" href="/member/login">로그인</a>
+                    <a class="btn btn-sm btn-outline-secondary" href="/member/mem_write">회원가입</a>
+                </th:block>
+                <th:block sec:authorize="hasRole('MEMBER')">
+                    <a class="btn btn-sm btn-outline-secondary" href="/logout"><span>로그아웃</span></a>
+                    <a class="btn btn-sm btn-outline-secondary" href="/item/cart"><span>장바구니</span></a>
+                    <a class="btn btn-sm btn-outline-secondary" href="/item/buy_item"><span>주문조회</span></a>
+                    <a class="btn btn-sm btn-outline-secondary" th:href="@{/member/mypage/{idx}}"><span>마이페이지</span></a>
+                </th:block>
+                <th:block sec:authorize="hasRole('ADMIN')">
+                    <a class="btn btn-sm btn-outline-secondary" href="/logout"><span>로그아웃</span></a>
+                    <a class="btn btn-sm btn-outline-secondary" href="/item/cart"><span>장바구니</span></a>
+                    <a class="btn btn-sm btn-outline-secondary" href="/item/buy_item"><span>주문조회</span></a>
+                    <a class="btn btn-sm btn-outline-secondary" href="/member/mypage"><span>마이페이지</span></a>
+                    <a class="btn btn-sm btn-outline-secondary" href="/admin/mem_list"><span>관리자용</span></a>
+                </th:block>
             </div>
+        </div>
+    </header>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light rounded" aria-label="Twelfth navbar example">
 
-            <div class="collapse navbar-collapse" id="navbar">
-
-                <ul class="nav navbar-nav navbar-right">
-
-                    <li><a href="#">Home</a></li>
-
-                    <li><a href="#">Blog</a></li>
-
-                    <li><a href="#">Shortcode</a></li>
-
-                    <li><a href="#">Features</a></li>
-
-                    <li><a href="#">Media</a></li>
-
-                    <li><a href="#">About Us</a></li>
-
-                    <li><a href="#">Contact Us</a></li>
+            <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample10">
+                <ul class="navbar-nav category1">
+                    <li class="nav-item">
+                        <a href="/member/item_list/0"><div>전체상품</div></a>
+                    </li>
+                    <li class="nav-item dropdown"  th:each="category1 : ${first_category}" th:if="${category1.pidx2} == 0">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown10" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span th:text="${category1.categoryname}"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdown10">
+                            <li th:each="category2 : ${second_category}" th:if="${category1.pidx1} == ${category2.pidx1} and ${category2.pidx2} != 0 and ${category2.pidx3} == 0">
+                                <a><span th:text="${category2.categoryname}"></span></a>
+                                <ul class="category3">
+                                    <li th:each="category3 : ${third_category}" th:if="${category2.pidx1} == ${category3.pidx1} and ${category2.pidx2} == ${category3.pidx2} and ${category3.pidx3} != 0">
+                                        <a th:href="@{/member/item_list/{idx}(idx=${category3.idx})}"><span th:text="${category3.categoryname}"></span></a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/notice/review"><div>상품사용후기</div></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/notice/notice"><div>공지사항</div></a>
+                    </li>
 
                 </ul>
-
-            </div><!-- /.navbar-collapse -->
-
-        </div><!-- /.container-fluid -->
-
+            </div>
     </nav>
-
 </div>
 
-</body>
+<main class="container">
+    <div>
+        <img src="/images/home.png" style="width: 1000px; margin: 5px auto auto auto;">
+    </div>
+    <div id="notice1">
+        <div id="notice2">
+            상품사용후기
+            <ul>
+                <li>사용사용</li>
+            </ul>
+        </div>
+        <div id="notice3">
+            공지사항
+            <ul>
+                <li>공지공지</li>
+            </ul>
+        </div>
+    </div>
+    <div>
+        <div>제품</div>
+        <div>리스트들</div>
+    </div>
+</main>
 
+<footer class="container">
+    Copyright@2024
+</footer>
+</body>
 </html>

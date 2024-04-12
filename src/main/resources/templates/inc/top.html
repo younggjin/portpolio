@@ -1,43 +1,56 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6" th:fragment="top">
 
-<header>
-    <div id="top1">
-        <th:block sec:authorize="isAnonymous()">
-            <a href="/member/login"><span>로그인</span></a>
-            <a href="/member/mem_write"><span>회원가입</span></a>
-        </th:block>
-        <th:block sec:authorize="hasRole('MEMBER')">
-            <a href="/logout"><span>로그아웃</span></a>
-            <a href="/item/cart"><span>장바구니</span></a>
-            <a href="/item/buy_item"><span>주문조회</span></a>
-            <a th:href="@{/member/mypage/{idx}}"><span>마이페이지</span></a>
-        </th:block>
-        <th:block sec:authorize="hasRole('ADMIN')">
-            <a href="/logout"><span>로그아웃</span></a>
-            <a href="/item/cart"><span>장바구니</span></a>
-            <a href="/item/buy_item"><span>주문조회</span></a>
-            <a href="/member/mypage"><span>마이페이지</span></a>
-            <a href="/admin/mem_list"><span>관리자용</span></a>
-        </th:block>
-    </div>
-    <div id="top2">
-        <div><a href="/"><img src="/images/logo.png" alt="" style="width:30%"></a></div>
-        <div id="top3" class="search">
-            <input type="text" id="search" placeholder="검색어 입력">
-            <img id="searchImg" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
+<div class="container">
+    <header class="blog-header py-3">
+        <div class="row flex-nowrap justify-content-between align-items-center">
+            <div class="col-4 pt-1">
+                <a href="/"><img src="/images/logo.png" alt="" style="width:30%"></a>
+            </div>
+            <div class="col-4 text-center" style="display:grid; grid-template-columns:1fr 0.1fr;">
+                <input type="text" class="search" placeholder="검색어 입력">
+                <button type="button" class="btn btn-secondary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="col-4 d-flex justify-content-end align-items-center">
+                <th:block sec:authorize="isAnonymous()">
+                    <a class="btn btn-sm btn-outline-secondary" href="/member/login">로그인</a>
+                    <a class="btn btn-sm btn-outline-secondary" href="/member/mem_write">회원가입</a>
+                </th:block>
+                <th:block sec:authorize="hasRole('MEMBER')">
+                    <a class="btn btn-sm btn-outline-secondary" href="/logout"><span>로그아웃</span></a>
+                    <a class="btn btn-sm btn-outline-secondary" href="/item/cart"><span>장바구니</span></a>
+                    <a class="btn btn-sm btn-outline-secondary" href="/item/buy_item"><span>주문조회</span></a>
+                    <a class="btn btn-sm btn-outline-secondary" th:href="@{/member/mypage/{idx}}"><span>마이페이지</span></a>
+                </th:block>
+                <th:block sec:authorize="hasRole('ADMIN')">
+                    <a class="btn btn-sm btn-outline-secondary" href="/logout"><span>로그아웃</span></a>
+                    <a class="btn btn-sm btn-outline-secondary" href="/item/cart"><span>장바구니</span></a>
+                    <a class="btn btn-sm btn-outline-secondary" href="/item/buy_item"><span>주문조회</span></a>
+                    <a class="btn btn-sm btn-outline-secondary" href="/member/mypage"><span>마이페이지</span></a>
+                    <a class="btn btn-sm btn-outline-secondary" href="/admin/mem_list"><span>관리자용</span></a>
+                </th:block>
+            </div>
         </div>
-    </div>
-</header>
-<nav>
-    <div id="nav">
-            <ul id="category1">
-                <li><a href="/member/item_list/0"><div>전체상품</div></a></li>
-                <li th:each="category1 : ${first_category}" th:if="${category1.pidx2} == 0">
-                    <a><span th:text="${category1.categoryname}"></span></a>
-                    <ul id="category2">
+    </header>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light rounded" aria-label="Twelfth navbar example">
+
+        <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample10">
+            <ul class="navbar-nav category1">
+                <li class="nav-item">
+                    <a href="/member/item_list/0"><div>전체상품</div></a>
+                </li>
+                <li class="nav-item dropdown"  th:each="category1 : ${first_category}" th:if="${category1.pidx2} == 0">
+                    <a class="nav-link dropdown-toggle" id="dropdown10" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span th:text="${category1.categoryname}"></span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdown10">
                         <li th:each="category2 : ${second_category}" th:if="${category1.pidx1} == ${category2.pidx1} and ${category2.pidx2} != 0 and ${category2.pidx3} == 0">
                             <a><span th:text="${category2.categoryname}"></span></a>
-                            <ul id="category3">
+                            <ul class="category3">
                                 <li th:each="category3 : ${third_category}" th:if="${category2.pidx1} == ${category3.pidx1} and ${category2.pidx2} == ${category3.pidx2} and ${category3.pidx3} != 0">
                                     <a th:href="@{/member/item_list/{idx}(idx=${category3.idx})}"><span th:text="${category3.categoryname}"></span></a>
                                 </li>
@@ -45,8 +58,14 @@
                         </li>
                     </ul>
                 </li>
-                <li><a href="/notice/review"><div>상품사용후기</div></a></li>
-                <li><a href="/notice/notice"><div>공지사항</div></a></li>
+                <li class="nav-item">
+                    <a href="/notice/review"><div>상품사용후기</div></a>
+                </li>
+                <li class="nav-item">
+                    <a href="/notice/notice"><div>공지사항</div></a>
+                </li>
+
             </ul>
-    </div>
-</nav>
+        </div>
+    </nav>
+</div>

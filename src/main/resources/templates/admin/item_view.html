@@ -7,7 +7,7 @@
     <title>상품 수정</title>
 </head>
 <body>
-<section>
+<section class="container">
     <form th:action="@{|/admin/item_modify_proc/${idx}|}" method="post" enctype="multipart/form-data">
     <table>
         <tr>
@@ -78,9 +78,9 @@
         </tr>
         <tr>
             <td colspan="2">
-                <a href="/admin/item_list"><input type="button" value="상품 목록"></a>
-                <input type="submit" value="수정완료">
-                <a th:href="@{/admin/item_delete/{idx}(idx=${idx})}"><input type="button" value="삭제"></a>
+                <a href="/admin/item_list"><input type="button" class="btn btn-outline-secondary btn-sm" value="상품 목록"></a>
+                <input type="submit" class="btn btn-outline-secondary btn-sm" value="수정완료">
+                <a th:href="@{/admin/item_delete/{idx}(idx=${idx})}"><input type="button" class="btn btn-outline-secondary btn-sm" value="삭제"></a>
             </td>
         </tr>
     </table>

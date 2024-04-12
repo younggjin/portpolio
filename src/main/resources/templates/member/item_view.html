@@ -7,7 +7,7 @@
     <title>상품 정보</title>
 </head>
 <body>
-<section>
+<section class="container">
     <div id="view">
         <div>
             <span  class="mySlides" th:each = "fileName: ${list.storedFileName}"><img th:src="@{|/upload/${fileName}|}" alt="" style="width: 350px;"></span>
@@ -30,9 +30,9 @@
                 <tr>
                     <td id="quantity">수량</td>
                     <td>
-                        <input type="button" onclick="count('minus')" value="-">
+                        <input type="button" class="btn btn-outline-secondary btn-sm" onclick="count('minus')" value="-">
                         <input type="text" name="item_quantity" id="result" value="1" style="width:50px;" readonly>
-                        <input type="button" onclick="count('plus')" value="+">
+                        <input type="button" class="btn btn-outline-secondary btn-sm" onclick="count('plus')" value="+">
                     </td>
                 </tr>
                 <tr>
@@ -41,8 +41,8 @@
                 </tr>
                 <tr>
                     <td colspan="2" id="buy_item">
-                        <input type="submit" value="장바구니">
-                        <a href="">바로구매</a>
+                        <input type="submit" class="btn btn-outline-secondary btn-sm" value="장바구니">
+                        <button type="button" class="btn btn-outline-secondary btn-sm" href=""><a >바로구매</a></button>
                     </td>
                 </tr>
             </table>

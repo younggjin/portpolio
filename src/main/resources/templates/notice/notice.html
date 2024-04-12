@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}"
+      layout:fragment="Content"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="/css/top.css">
     <link rel="stylesheet" type="text/css" href="/css/table.css">
     <title>공지사항</title>
 </head>
 <body>
-<div th:replace="~{inc/top}"></div>
-<section>
+<section class="container">
     <div><h3>공지사항</h3></div>
     <table border="1">
         <tr>
@@ -30,6 +29,5 @@
         </tr>
     </table>
 </section>
-<div th:replace="~{inc/footer}"></div>
 </body>
 </html>

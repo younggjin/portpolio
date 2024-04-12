@@ -7,7 +7,7 @@
     <title>회원목록</title>
 </head>
 <body>
-<section>
+<section class="container">
     <table>
         <tr>
             <th>회원 번호</th>
@@ -47,9 +47,9 @@
         </tr>
         <tr>
             <td colspan="2">
-                <a href="/admin/mem_list"><input type="button" value="회원 목록"></a>
-                <input type="submit" value="수정 완료">
-                <a th:href="|@{/admin/mem_delete/{idx}(idx=${view.idx})}|"><input type="button" value="회원 삭제"></a>
+                <a href="/admin/mem_list"><input type="button" class="btn btn-outline-secondary btn-sm" value="회원 목록"></a>
+                <input type="submit" class="btn btn-outline-secondary btn-sm" value="수정 완료">
+                <a th:href="|@{/admin/mem_delete/{idx}(idx=${view.idx})}|"><input type="button" class="btn btn-outline-secondary btn-sm" value="회원 삭제"></a>
             </td>
         </tr>
     </table>

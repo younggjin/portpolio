@@ -7,7 +7,7 @@
     <title>제품 등록</title>
 </head>
 <body>
-<section>
+<section class="container">
     <div><h3>제품 등록</h3></div>
     <form action="item_write_proc" method="post" enctype="multipart/form-data">
     <table>
@@ -50,17 +50,17 @@
         <tr>
             <th>제품 사진</th>
             <td colspan="2">
-                <input type="file" name="mainFile">
+                <input type="file" class="btn btn-outline-secondary btn-sm" name="mainFile">
                 <br>
-                <input type="file" name="itemFile">
+                <input type="file" class="btn btn-outline-secondary btn-sm" name="itemFile">
                 <br>
-                <input type="file" name="itemFile">
+                <input type="file" class="btn btn-outline-secondary btn-sm" name="itemFile">
             </td>
         </tr>
         <tr>
             <td colspan="3" style="text-align: center;">
-                <input type="submit" value="제품 등록">
-                <input type="reset" value="다시 쓰기">
+                <input type="submit" class="btn btn-outline-secondary btn-sm" value="제품 등록">
+                <input type="reset" class="btn btn-outline-secondary btn-sm" value="다시 쓰기">
             </td>
         </tr>
     </table>

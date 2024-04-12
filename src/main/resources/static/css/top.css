@@ -1,14 +1,23 @@
 body{
-    width: 1000px;
+    padding-bottom: 20px;
     margin: 0 auto;
     text-align: center;
 }
-.search {
-  position: relative;
-  width: 300px;
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 
-#search {
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+
+.search {
   width: 100%;
   border: 1px solid #bbb;
   border-radius: 8px;
@@ -16,80 +25,86 @@ body{
   font-size: 14px;
 }
 
-#searchImg {
+.searchImg {
   position : absolute;
   width: 17px;
   top: 10px;
   right: 0px;
   margin: 0;
 }
+
 a{
     color: black;
     text-decoration: none;
 }
-#top1{
-    margin: 0 auto;
-    text-align: right;
-}
-#top2{
-    margin: 20px 10px;
-    display: grid;
-    grid-template-columns: 300px 2fr 1fr;
-}
-#top3{
-    margin: auto;
-}
+
 nav{
-    border-top: 1px solid #c8c8c8;
+
     border-bottom: 1px solid black;
     height: 45px;
 }
-#nav{
-    margin: auto 100px;
-    display: grid;
-    color: black;
-}
-#category1, #category2, #category3{
+
+.category1, .category2, .category3{
     margin: 0;
     padding: 0;
     list-style-type: none;
 }
-#category1 > li{
+.category1 > li{
     float: inline-start;
 }
-#category1 > li > a {
+.category1 > li > a {
     display: block;
     padding: 10px 40px;
+    line-height: 20px; /* 예시, 필요에 따라 조절 */
+        vertical-align: middle;
 }
-#category2{
+.category2{
     height:0;
     position: relative;
     overflow: hidden;
     z-index: 10;
 }
-#category1 > li:hover{
+.category1 > li:hover{
 
     transition-duration: 0.2s;
 }
-#category1 > li:hover #category2{
+.category1 > li:hover .category2{
     height: auto;
     background-color:white;
     transition-duration: 0.5s;
 
 }
-#category3{
+.category3{
     height:0;
     overflow:hidden;
 }
-#category2 > li:hover{
+.dropdown-menu > li:hover{
 
     transition-duration: 0.2s;
 }
-#category2 > li:hover #category3{
+.dropdown-menu > li:hover .category3{
     height: auto;
     background-color: white;
     transition-duration: 0.5s;
 }
+/* Hover를 위한 CSS 추가 */
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+/* 드롭다운 화살표 제거 */
+.nav-link.dropdown-toggle::after {
+    display: none;
+}
+.navbar-light .navbar-nav .nav-link {
+    /* color: rgba(0, 0, 0, .55); */
+    color: inherit; /* 이전 스타일을 상속하지 않고 부모 요소의 색상을 상속 */
+}
+/* 드롭다운 트리거 링크 텍스트 색상 변경 */
+.navbar-light .navbar-nav .nav-link {
+    color: black; /* 텍스트 색상을 검정색으로 변경 */
+    padding: 10px 40px;
+}
+
 footer{
     border-top: 1px solid black;
 }

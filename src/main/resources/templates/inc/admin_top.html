@@ -1,28 +1,54 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
-<header>
-    <div id="top1">
-        <th:block sec:authorize="hasRole('ADMIN')">
-            <a href="/logout"><span>로그아웃</span></a>
-            <a href="/item/cart"><span>장바구니</span></a>
-            <a href="/item/buy_item"><span>주문조회</span></a>
-            <a href="/member/mypage"><span>마이페이지</span></a>
-            <a href="/admin/mem_list"><span>관리자용</span></a>
-        </th:block>
-    </div>
-    <div id="top2">
-        <div><a href="/"><img src="/images/logo.png" alt="" style="width:30%"></a></div>
-        <div id="top3"><input type="text" name="totalsearch"><button>검색</button></div>
-    </div>
-</header>
-</header>
-<nav>
-    <div id="nav">
-        <a href="/admin/mem_list"><div>회원 목록</div></a>
-        <a href="/admin/category_write"><div>카테고리 등록</div></a>
-        <a href="/admin/item_write"><div>상품 등록</div></a>
-        <a href="/admin/item_list"><div>상품 목록</div></a>
-        <a href="/notice/review"><div>상품사용후기</div></a>
-        <a href="/notice/notice"><div>공지사항</div></a>
-    </div>
-</nav>
+<div class="container">
+    <header class="blog-header py-3">
+        <div class="row flex-nowrap justify-content-between align-items-center">
+            <div class="col-4 pt-1">
+                <a href="/"><img src="/images/logo.png" alt="" style="width:30%"></a>
+            </div>
+            <div class="col-4 text-center" style="display:grid; grid-template-columns:1fr 0.1fr;">
+                <input type="text" class="search" placeholder="검색어 입력">
+                <button type="button" class="btn btn-secondary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="col-4 d-flex justify-content-end align-items-center">
+                <th:block sec:authorize="hasRole('ADMIN')">
+                    <a class="btn btn-sm btn-outline-secondary" href="/logout"><span>로그아웃</span></a>
+                    <a class="btn btn-sm btn-outline-secondary" href="/item/cart"><span>장바구니</span></a>
+                    <a class="btn btn-sm btn-outline-secondary" href="/item/buy_item"><span>주문조회</span></a>
+                    <a class="btn btn-sm btn-outline-secondary" href="/member/mypage"><span>마이페이지</span></a>
+                    <a class="btn btn-sm btn-outline-secondary" href="/admin/mem_list"><span>관리자용</span></a>
+                </th:block>
+            </div>
+        </div>
+    </header>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light rounded" aria-label="Twelfth navbar example">
+
+        <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample10">
+            <ul class="navbar-nav category1">
+                <li class="nav-item">
+                    <a href="/admin/mem_list"><div>회원 목록</div></a>
+                </li>
+                <li class="nav-item">
+                    <a href="/admin/category_write"><div>카테고리 등록</div></a>
+                </li>
+                <li class="nav-item">
+                    <a href="/admin/item_write"><div>상품 등록</div></a>
+                </li>
+                <li class="nav-item">
+                    <a href="/admin/item_list"><div>상품 목록</div></a>
+                </li>
+                <li class="nav-item">
+                    <a href="/notice/review"><div>상품사용후기</div></a>
+                </li>
+                <li class="nav-item">
+                    <a href="/notice/notice"><div>공지사항</div></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
