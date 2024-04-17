@@ -13,6 +13,7 @@ import com.example.portfolio.repository.BuyRepository;
 import com.example.portfolio.repository.CartRepository;
 import com.example.portfolio.repository.DeliveryRepository;
 import com.example.portfolio.repository.MemberRepository;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +21,7 @@ import java.security.Principal;
 import java.util.List;
 
 @Service
+@Log4j2
 public class DeliveryService {
     private final MemberRepository memberRepository;
     private final CartRepository cartRepository;
@@ -54,14 +56,14 @@ public class DeliveryService {
         }
     }
     public void saveBuy(DeliveryDTO deliveryDTO, Principal principal){
-        buyRepository.save(BuyEntity.saveBuyEntity(deliveryDTO, principal));
+        //buyRepository.save(BuyEntity.saveBuyEntity(deliveryDTO, principal));
     }
     @Transactional
     public void saveDelivery(DeliveryDTO deliveryDTO, Principal principal){
         BuyEntity buyEntity = buyRepository.findByUserid(principal.getName());
-        deliveryRepository.save(DeliveryEntity.saveDeliveryEntity(deliveryDTO, principal, buyEntity));
+        //deliveryRepository.save(DeliveryEntity.saveDeliveryEntity(deliveryDTO, principal, buyEntity));
 
-        deliveryDTO.getCartIdx();
+        log.info(deliveryDTO.getCartIdx().get(0));
 
 
     }
