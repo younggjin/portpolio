@@ -25,6 +25,7 @@ public class DeliveryDTO {
     private String deliveryContent;
 
     //상품 내역
+    private List<String> cartIdx;
     private List<String> itemIdx;
     private List<String> itemPrice;
     private List<String> quantity;

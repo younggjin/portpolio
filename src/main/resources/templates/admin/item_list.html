@@ -3,13 +3,13 @@
       layout:fragment="Content"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="/css/table.css">
     <title>제품 목록</title>
 </head>
 <body>
 <section class="container">
     <div><h3>상품 목록</h3></div>
-    <table border="1">
+    <table class="table table-hover">
+        <thead>
         <tr>
             <th style="width: 10%;">번호</th>
             <th colspan="2" style="width: 40%;">상품명</th>
@@ -17,6 +17,8 @@
             <th style="width: 10%;">수량</th>
             <th style="width: 25%;">등록 날짜</th>
         </tr>
+        </thead>
+        <tbody>
         <tr th:each="list, listStat : ${list}">
             <td th:text="${list.idx}"></td>
             <td><a th:href="@{|/admin/item_view/${list.idx}|}"><div th:each = "fileName: ${list.storedFileName}"><img th:src="@{|/thumbnail/${fileName}|}" alt=""></div></a></td>
@@ -25,6 +27,7 @@
             <td th:text="${list.item_quantity}"></td>
             <td th:text="${#temporals.format(list.regdate, 'yyyy-MM-dd')}"></td>
         </tr>
+        </tbody>
     </table>
     <!-- 첫번째 페이지로 이동 -->
     <!-- /board/paging?page=1 -->

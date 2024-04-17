@@ -9,19 +9,23 @@
 <body>
 <section class="container">
     <div><h3>회원 목록</h3></div>
-    <table border="1">
+    <table class="table table-hover">
+        <thead>
         <tr>
             <th style="width: 10%;">번호</th>
             <th style="width: 30%;">아이디</th>
             <th style="width: 30%;">이름</th>
             <th style="width: 30%;">가입 날짜</th>
         </tr>
+        </thead>
+        <tbody>
         <tr th:each="list : ${list}">
             <td>[[${list.idx}]]</td>
             <td><a th:href="@{|/admin/mem_view/${list.idx}|}">[[${list.userid}]]</a></td>
             <td th:text="${list.name}"></td>
             <td th:text="${#temporals.format(list.regdate, 'yyyy-MM-dd HH:mm:ss')}"></td>
         </tr>
+        </tbody>
     </table>
     <!-- 첫번째 페이지로 이동 -->
     <!-- /board/paging?page=1 -->

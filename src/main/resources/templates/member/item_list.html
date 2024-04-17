@@ -12,10 +12,12 @@
     <div id="item_list">
         <div th:if="${#lists.isEmpty(list.getContent())}">입력된 상품이 없습니다.</div>
         <div th:each="list, listStat : ${list}">
-            <a th:href="@{|/member/item_view/${list.idx}|}">
-                <div th:each = "fileName: ${list.storedFileName}"><img th:src="@{|/thumbnail/${fileName}|}" alt=""></div>
+            <a class="card" style="width: 16rem;" th:href="@{|/member/item_view/${list.idx}|}">
+                <div th:each = "fileName: ${list.storedFileName}"><img class="card-img-top" th:src="@{|/thumbnail/${fileName}|}" alt=""></div>
+                <div class="card-body">
                 <div>[[${list.item_name}]]</div>
                 <div th:text="${#numbers.formatInteger(list.item_price, 0, 'COMMA')}+'원'"></div>
+                </div>
             </a>
         </div>
     </div>

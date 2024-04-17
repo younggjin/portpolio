@@ -71,7 +71,8 @@
         <tr th:each="cartList, cartListStat : ${cartList}">
             <td>
                 <span th:text="${cartListStat.count}"></span>
-                <input type="hidden" name="itemIdx" th:value="${cartList.idx}">
+                <input type="hidden" name="itemIdx" th:value="${cartList.item_idx}">
+                <input type="hidden" name="cartIdx" th:value="${cartList.idx}">
             </td>
             <td>
                 <div th:each="fileName: ${cartList.storedFileName}"><img th:src="@{|/thumbnail/${fileName}|}" alt="" style="width:50px; align: left;"></div>

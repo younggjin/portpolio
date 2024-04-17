@@ -61,5 +61,8 @@ public class DeliveryService {
         BuyEntity buyEntity = buyRepository.findByUserid(principal.getName());
         deliveryRepository.save(DeliveryEntity.saveDeliveryEntity(deliveryDTO, principal, buyEntity));
 
+        deliveryDTO.getCartIdx();
+
+
     }
 }

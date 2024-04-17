@@ -9,7 +9,7 @@
 <body>
 <section class="container">
     <form th:action="@{|/admin/item_modify_proc/${idx}|}" method="post" enctype="multipart/form-data">
-    <table>
+    <table class="table">
         <tr>
             <th>상품 번호</th>
             <td th:text="${list.idx}"><input type="hidden" name="idx" th:value="${list.idx}"></td>
