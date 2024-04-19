@@ -4,6 +4,8 @@
   <img src="https://img.shields.io/badge/SpringBoot-\?style=flat-square&logo=springboot&logoColor=black"/>
   <img src="https://img.shields.io/badge/thymeleaf-005F0F?style=flat-square&logo=thymeleaf&logoColor=black"/>
     <img src="https://img.shields.io/badge/bootstrap-7952B3?style=flat-square&logo=bootstrap&logoColor=black"/>
+    <img src="https://img.shields.io/badge/oracle-F80000?style=flat-square&logo=oracle&logoColor=black"/>
+
 </p>
 
 ## 개요
@@ -22,5 +24,10 @@
 사용된 라이브러리 넣기
 
 - Thumbnailator 0.4.8
-- Thymeleaf Extras Spring Security 6
-- Lombok
+Thymeleaf Extras Spring Security 6
+Lombok
+Spring Boot DevTools
+Oracle JDBC Driver (ojdbc11)
+OAuth2 Client 
+MySQL JDBC Driver
+
