@@ -14,8 +14,8 @@
         <form action="/member/mem_write_proc" method="post" name="fm" onsubmit="return join_btn()">
             <span class="name">
                 <b>아이디</b>
-                <input type="text" name="userid" id="userid" onblur="useridCheck()" style="width: 150px;">
-                <input type="button" class="btn btn-outline-secondary btn-sm" value="아이디 중복확인">
+                <input type="text" name="userid" id="userid"  style="width: 150px;">
+                <input type="button" class="btn btn-outline-secondary btn-sm" onclick="useridCheck()" value="아이디 중복확인">
                 <div id="check-result" style="width: 300px;"></div>
                 <input type="hidden" id="checked" value="unchecked">
             </span>

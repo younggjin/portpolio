@@ -42,6 +42,7 @@ public class BuyEntity extends DateEntity {
     public static BuyEntity saveBuyEntity(DeliveryDTO deliveryDTO, Principal principal){
 
         BuyEntity buyEntity = new BuyEntity();
+        
         for(int a=0; a< deliveryDTO.getItemIdx().size(); a++) {
             buyEntity.setUserid(principal.getName());
             buyEntity.setItemIdx(deliveryDTO.getItemIdx().get(a));

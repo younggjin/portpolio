@@ -15,7 +15,7 @@
             <th style="width: 30%;">카테고리</th>
             <td>
                 <!-- 대분류 -->
-                <select name="category1" id="category1" onchange="first()">
+                <select name="category1" class="form-select" aria-label="Default select example" id="category1" onchange="first()">
                     <option value="0">선택</option>
                     <th:block th:each="category1 : ${category1}">
                     <option th:value="${category1.pidx1}">[[${category1.categoryname}]]</option>
@@ -33,28 +33,35 @@
         </tr>
         <tr>
             <th>제품명</th>
-            <td colspan="2"><input type="text" name="item_name" style="width: 400px;"></td>
+            <td colspan="2"><input type="text" name="item_name" class="form-control"></td>
         </tr>
         <tr>
             <th>제품 가격</th>
-            <td colspan="2"><input type="number" name="item_price" style="width: 400px;"></td>
+            <td colspan="2"><input type="number" name="item_price" class="form-control"></td>
         </tr>
         <tr>
             <th>제품 수량</th>
-            <td colspan="2"><input type="number" name="item_quantity" style="width: 400px;"></td>
+            <td colspan="2"><input type="number" name="item_quantity" class="form-control"></td>
         </tr>
         <tr>
             <th>제품 설명</th>
-            <td colspan="2"><textarea name="item_content" style="width: 400px; height: 300px;"></textarea></td>
+            <td colspan="2"><textarea name="item_content" class="form-control" style="height: 300px;"></textarea></td>
         </tr>
         <tr>
             <th>제품 사진</th>
             <td colspan="2">
-                <input type="file" class="btn btn-outline-secondary btn-sm" name="mainFile">
-                <br>
-                <input type="file" class="btn btn-outline-secondary btn-sm" name="itemFile">
-                <br>
-                <input type="file" class="btn btn-outline-secondary btn-sm" name="itemFile">
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="inputGroupFile01">첫번째 파일</label>
+                    <input type="file" class="form-control" id="inputGroupFile01" name="mainFile">
+                </div>
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="inputGroupFile02">두번째 파일</label>
+                    <input type="file" class="form-control" id="inputGroupFile02" name="itemFile">
+                </div>
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="inputGroupFile03">세번째 파일</label>
+                    <input type="file" class="form-control" id="inputGroupFile03" name="itemFile">
+                </div>
             </td>
         </tr>
         <tr>

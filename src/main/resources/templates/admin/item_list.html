@@ -12,7 +12,7 @@
         <thead>
         <tr>
             <th style="width: 10%;">번호</th>
-            <th colspan="2" style="width: 40%;">상품명</th>
+            <th style="width: 30%;">상품명</th>
             <th style="width: 15%;">상품 금액</th>
             <th style="width: 10%;">수량</th>
             <th style="width: 25%;">등록 날짜</th>
@@ -20,36 +20,48 @@
         </thead>
         <tbody>
         <tr th:each="list, listStat : ${list}">
-            <td th:text="${list.idx}"></td>
-            <td><a th:href="@{|/admin/item_view/${list.idx}|}"><div th:each = "fileName: ${list.storedFileName}"><img th:src="@{|/thumbnail/${fileName}|}" alt=""></div></a></td>
-            <td><a th:href="@{|/admin/item_view/${list.idx}|}">[[${list.item_name}]]</a></td>
-            <td th:text="${#numbers.formatInteger(list.item_price, 0, 'COMMA')}"></td>
-            <td th:text="${list.item_quantity}"></td>
-            <td th:text="${#temporals.format(list.regdate, 'yyyy-MM-dd')}"></td>
+            <td th:text="${listStat.count}" style="vertical-align:middle;"></td>
+            <td style="vertical-align:middle;">
+                <div th:each = "fileName: ${list.storedFileName}"><a th:href="@{|/admin/item_view/${list.idx}|}"><img th:src="@{|/thumbnail/${fileName}|}" alt=""></a></div>
+                <div><a th:href="@{|/admin/item_view/${list.idx}|}">[[${list.item_name}]]</a></div>
+            </td>
+            <!--<td><a th:href="@{|/admin/item_view/${list.idx}|}">[[${list.item_name}]]</a></td>-->
+            <td th:text="${#numbers.formatInteger(list.item_price, 0, 'COMMA')}" style="vertical-align:middle;"></td>
+            <td th:text="${list.item_quantity}" style="vertical-align:middle;"></td>
+            <td th:text="${#temporals.format(list.regdate, 'yyyy-MM-dd')}" style="vertical-align:middle;"></td>
         </tr>
         </tbody>
     </table>
-    <!-- 첫번째 페이지로 이동 -->
-    <!-- /board/paging?page=1 -->
-    <a th:href="@{/admin/item_list(page=1)}">◀</a>
-    <!-- 이전 링크 활성화 비활성화 -->
-    <!-- boardList.getNumber() 사용자:2페이지 getNumber()=1 -->
-    <a th:href="${list.first} ? '#' : @{/admin/item_list(page=${list.number})}"><</a>
-
-    <!-- 페이지 번호 링크(현재 페이지는 숫자만)  for(int page=startPage; page<=endPage; page++)-->
-    <span th:each="page: ${#numbers.sequence(startPage, endPage)}">
-    <!-- 현재페이지는 링크 없이 숫자만 -->
-    <span th:if="${page == list.number + 1}" th:text="${page}"></span>
-        <!-- 현재페이지 번호가 아닌 다른 페이지번호에는 링크를 보여줌 -->
-    <span th:unless="${page == list.number + 1}">
-        <a th:href="@{/admin/item_list(page=${page})}" th:text="${page}"></a>
-    </span>
-    </span>
-
-    <!-- 다음 링크 활성화 비활성화 사용자: 2페이지, getNumber: 1, 3페이지-->
-    <a th:href="${list.last} ? '#' : @{/admin/item_list(page=${list.number + 2})}">></a>
-    <!-- 마지막 페이지로 이동 -->
-    <a th:href="@{/admin/item_list(page=${list.totalPages})}">▶</a>
+    <div th:unless="${#lists.isEmpty(list.getContent())}">
+        <div aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item">
+                    <a class="page-link" aria-label="Previous" th:href="@{/member/item_list/{idx}(idx=${category_idx}, page=1)}">
+                        <span aria-hidden="true">◀</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" aria-label="Previous" th:href="${list.first} ? '#' : @{/member/item_list/{idx}(idx=${category_idx}, page=${list.number})}">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <th:block th:each="page: ${#numbers.sequence(startPage, endPage)}">
+                    <li class="page-item" ><a class="page-link" href="#" th:if="${page == list.number + 1}"  th:text="${page}"></a></li>
+                    <li class="page-item" ><a class="page-link" th:if="${page != list.number + 1} and ${page != 0}" th:href="@{/member/item_list/{idx}(idx=${category_idx}, page=${page})}" th:text="${page}"></a></li>
+                </th:block>
+                <li class="page-item">
+                    <a class="page-link" aria-label="Next" th:href="${list.last} ? '#' : @{/member/item_list/{idx}(idx=${category_idx}, page=${list.number + 2})}">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" aria-label="Next" th:href="@{/member/item_list/{idx}(idx=${category_idx}, page=${list.totalPages})}">
+                        <span aria-hidden="true">▶</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </section>
 </body>
 </html>

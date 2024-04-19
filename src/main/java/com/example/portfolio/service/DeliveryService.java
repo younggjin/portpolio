@@ -56,15 +56,17 @@ public class DeliveryService {
         }
     }
     public void saveBuy(DeliveryDTO deliveryDTO, Principal principal){
-        //buyRepository.save(BuyEntity.saveBuyEntity(deliveryDTO, principal));
+        buyRepository.save(BuyEntity.saveBuyEntity(deliveryDTO, principal));
     }
     @Transactional
     public void saveDelivery(DeliveryDTO deliveryDTO, Principal principal){
         BuyEntity buyEntity = buyRepository.findByUserid(principal.getName());
-        //deliveryRepository.save(DeliveryEntity.saveDeliveryEntity(deliveryDTO, principal, buyEntity));
+        deliveryRepository.save(DeliveryEntity.saveDeliveryEntity(deliveryDTO, principal, buyEntity));
 
-        log.info(deliveryDTO.getCartIdx().get(0));
-
+        for(int a=0; a<deliveryDTO.getCartIdx().size(); a++){
+            Long delCart = Long.valueOf(deliveryDTO.getCartIdx().get(a));
+            cartRepository.deleteById(delCart);
+        }
 
     }
 }

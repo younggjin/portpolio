@@ -11,8 +11,8 @@
     <div id="view">
         <div>
             <span  class="mySlides" th:each = "fileName: ${list.storedFileName}"><img th:src="@{|/upload/${fileName}|}" alt="" style="width: 350px;"></span>
-            <input type="button" onclick="plusSlides(-1)" value="❮">
-            <input type="button" onclick="plusSlides(1)" value="❯">
+            <input type="button" class="btn btn-outline-secondary btn-sm" onclick="plusSlides(-1)" value="❮">
+            <input type="button" class="btn btn-outline-secondary btn-sm" onclick="plusSlides(1)" value="❯">
         </div>
         <div>
             <form action="/item/item_cart_proc" method="post">

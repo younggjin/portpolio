@@ -25,9 +25,20 @@
             </ul>
         </div>
     </div>
-    <div>
-        <div>제품</div>
-        <div>리스트들</div>
+    <div id="item">
+        <div><h3>신제품</h3></div>
+        <div id="item_list">
+            <div th:each="list, listStat : ${itemList}">
+                <a class="card" style="width: 16rem;" th:href="@{|/member/item_view/${list.idx}|}">
+                    <div th:each = "fileName: ${list.storedFileName.get(0)}"><img class="card-img-top" th:src="@{|/thumbnail/${fileName}|}" alt="" style="height: 200px;"></div>
+                    <div class="card-body">
+                        <div>[[${list.item_name}]]</div>
+                        <div th:text="${#numbers.formatInteger(list.item_price, 0, 'COMMA')}+'원'"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div id="itemBnt"><input type="button" class="btn btn-outline-secondary btn-sm" value="상품 더보기"></div>
     </div>
 </section>
 </body>
