@@ -4,7 +4,7 @@
   <img src="https://img.shields.io/badge/SpringBoot-\?style=flat-square&logo=springboot&logoColor=black"/>
   <img src="https://img.shields.io/badge/thymeleaf-005F0F?style=flat-square&logo=thymeleaf&logoColor=black"/>
     <img src="https://img.shields.io/badge/bootstrap-7952B3?style=flat-square&logo=bootstrap&logoColor=black"/>
-    <img src="https://img.shields.io/badge/oracle-F80000?style=flat-square&logo=oracle&logoColor=F80000"/>
+    <img src="https://img.shields.io/badge/oracle-F80000?style=flat-square&logo=oracle&logoColor=black"/>
 
 </p>
 
