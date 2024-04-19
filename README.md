@@ -24,10 +24,10 @@
 사용된 라이브러리 넣기
 
 - Thumbnailator 0.4.8
-Thymeleaf Extras Spring Security 6
-Lombok
-Spring Boot DevTools
-Oracle JDBC Driver (ojdbc11)
-OAuth2 Client 
-MySQL JDBC Driver
+- Thymeleaf Extras Spring Security 6
+- Lombok
+- Spring Boot DevTools
+- Oracle JDBC Driver (ojdbc11)
+- OAuth2 Client 
+- MySQL JDBC Driver
 
