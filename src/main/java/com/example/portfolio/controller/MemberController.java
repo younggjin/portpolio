@@ -14,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+
 @Controller
 @Log4j2
 public class MemberController {
@@ -107,11 +109,11 @@ public class MemberController {
         return "/member/item_view";
     }
 
-    @GetMapping("/member/mypage/{idx}")
-    public String mypage(Model model, @PathVariable(name="idx") Long idx){
+    @GetMapping("/member/mypage")
+    public String mypage(Model model, Principal principal){
 //        MemberDTO memberDTO = memberService.findById(idx);
 //
 //        model.addAttribute("view", memberDTO);
-        return "/member/mypage";
+        return "/item/mypage";
     }
 }

@@ -24,7 +24,7 @@
                     <a class="btn btn-sm btn-outline-secondary" href="/logout"><span>로그아웃</span></a>
                     <a class="btn btn-sm btn-outline-secondary" href="/item/cart"><span>장바구니</span></a>
                     <a class="btn btn-sm btn-outline-secondary" href="/item/buy_item"><span>주문조회</span></a>
-                    <a class="btn btn-sm btn-outline-secondary" th:href="@{/member/mypage/{idx}}"><span>마이페이지</span></a>
+                    <a class="btn btn-sm btn-outline-secondary" th:href="@{/member/mypage}"><span>마이페이지</span></a>
                 </th:block>
                 <th:block sec:authorize="hasRole('ADMIN')">
                     <a class="btn btn-sm btn-outline-secondary" href="/logout"><span>로그아웃</span></a>

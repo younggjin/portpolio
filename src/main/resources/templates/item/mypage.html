@@ -6,47 +6,127 @@
     <title>마이페이지</title>
 </head>
 <body>
-<div th:replace="~{inc/top}"></div>
 <section class="container">
-    <div>마이페이지</div>
-    <table border="1">
-        <tr>
-            <th>회원 번호</th>
-            <td th:text="${view.idx}"></td>
-        </tr>
-        <tr>
-            <th>아이디</th>
-            <td th:text="${view.userid}"></td>
-        </tr>
-        <tr>
-            <th>비밀번호</th>
-            <td th:text="${view.password}"></td>
-        </tr>
-        <tr>
-            <th>이름</th>
-            <td th:text="${view.name}"></td>
-        </tr>
-        <tr>
-            <th>이메일</th>
-            <td th:text="|${view.mail}@${view.web}|"></td>
-        </tr>
-        <tr>
-            <th>주소</th>
-            <td th:text="|${view.add1} ${view.add2} ${view.add3}|"></td>
-        </tr>
-        <tr>
-            <th>전화번호</th>
-            <td th:text="|${view.tel1}-${view.tel2}-${view.tel3}|"></td>
-        </tr>
-        <tr>
-            <th>예치금</th>
-            <td th:text="${#numbers.formatInteger(view.cash, 0, 'COMMA')}"></td>
-        </tr>
-        <tr>
-            <th>등록일</th>
-            <td th:text="${#temporals.format(view.regdate, 'yyyy-MM-dd')}"></td>
-        </tr>
-    </table>
+    <div><h3>마이페이지</h3></div>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">내 정보</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">구매 내역</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">예치금 충전</button>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div style="margin: 20px;"><h4>내 정보</h4></div>
+            <table class="table">
+                <tr>
+                    <th>아이디</th>
+                    <td>ㅁㅁㅁㅁ</td>
+                    <th>이름</th>
+                    <td>ㅁㅁㅁㅁㅁ</td>
+                </tr>
+                <tr>
+                    <th>전화번호</th>
+                    <td>ㅁㅁㅁ</td>
+                    <th>이메일</th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>주소</th>
+                    <td colspan="3"></td>
+                </tr>
+                <tr>
+                    <th>등록일</th>
+                    <td></td>
+                </tr>
+            </table>
+            <div>최근 구매 항목</div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th style="width: 5%;"></th>
+                    <th style="width: 35%;">상품명</th>
+                    <th style="width: 20%;">금액</th>
+                    <th style="width: 10%;">수량</th>
+                    <th style="width: 20%;">총 금액</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1. </td>
+                    <td>ㅁㅁㅁ</td>
+                    <td>ㅁㅁㅁ</td>
+                    <td>ㅁㅁㅁ</td>
+                    <td>ㅁ</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div style="margin: 20px"><h4>구매 내역</h4></div>
+            <table  class="table">
+                <thead>
+                <tr>
+                    <th style="width: 5%;"></th>
+                    <th style="width: 35%;">상품명</th>
+                    <th style="width: 20%;">금액</th>
+                    <th style="width: 10%;">수량</th>
+                    <th style="width: 20%;">총 금액</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1. </td>
+                    <td>ㅁㅁㅁ</td>
+                    <td>ㅁㅁㅁ</td>
+                    <td>ㅁㅁㅁ</td>
+                    <td>ㅁ</td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="text-align:right; border-right:hidden;">총 금액</td>
+                    <td colspan="2" id="cartTotalPrice" style="text-align:right; border-left:hidden;">0원
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+            <h3>결제 금액</h3>
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>결제 금액</th>
+                    <td id="cartTotalPrice2" style="text-align:right">0원</td>
+                </tr>
+                <tr>
+                    <th >결제 수단</th>
+                    <td>
+                        <div id="payment-method"></div>
+                        <div id="agreement"></div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </section>
 </body>
+<script src="https://js.tosspayments.com/v1/payment-widget"></script>
+<script>
+    const clientKey = 'test_ck_D5GePWvyJnrK0W0k6q8gLzN97Eoq' // 상점을 특정하는 키
+    const customerKey = 'YbX2HuSlsC9uVJW6NMRMj' // 결제 고객을 특정하는 키
+    const amount = 15_000 // 결제 금액
+
+    /*결제위젯 영역 렌더링*/
+    const paymentWidget = PaymentWidget(clientKey, customerKey) // 회원 결제 초기화
+    // const paymentWidget = PaymentWidget(clientKey, PaymentWidget.ANONYMOUS) // 비회원 결제 초기화
+    paymentMethods = paymentWidget.renderPaymentMethods('#payment-method', amount)
+
+    /*약관 영역 렌더링*/
+    const paymentAgreement = paymentWidget.renderAgreement('#agreement')
+</script>
 </html>
