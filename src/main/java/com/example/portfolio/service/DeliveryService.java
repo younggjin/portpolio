@@ -84,7 +84,9 @@ public class DeliveryService {
 
     public DeliveryDTO findDelivery(Principal principal){
 
-        deliveryRepository.findByUserid(principal.getName());
+        DeliveryEntity deliveryEntity = deliveryRepository.findByUserid(principal.getName()).get(0);
+
+
 
         return null;
     }
