@@ -1,8 +1,10 @@
 package com.example.portfolio.controller;
 
+import com.example.portfolio.dto.DeliveryDTO;
 import com.example.portfolio.dto.ItemDTO;
 import com.example.portfolio.dto.ItemListDTO;
 import com.example.portfolio.dto.MemberDTO;
+import com.example.portfolio.service.DeliveryService;
 import com.example.portfolio.service.ItemService;
 import com.example.portfolio.service.MemberService;
 import lombok.extern.log4j.Log4j2;
@@ -22,10 +24,12 @@ public class MemberController {
 
     private final MemberService memberService;
     private final ItemService itemService;
+    private final DeliveryService deliveryService;
 
-    public MemberController(MemberService memberService, ItemService itemService) {
+    public MemberController(MemberService memberService, ItemService itemService, DeliveryService deliveryService) {
         this.memberService = memberService;
         this.itemService = itemService;
+        this.deliveryService = deliveryService;
     }
 
     @GetMapping("/member/login")
@@ -112,11 +116,17 @@ public class MemberController {
     @GetMapping("/member/mypage")
     public String mypage(Model model, Principal principal){
         //회원 정보
-        
+        MemberDTO member = deliveryService.findMember(principal);
+
+        model.addAttribute("memberList", member);
         //구매상품목록 정보
+        DeliveryDTO delivery = deliveryService.findDelivery(principal);
+
+        model.addAttribute("deliveryList", delivery);
         
         //배송지 정보
-        
+
+
         
         return "/item/mypage";
     }

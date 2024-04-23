@@ -22,26 +22,26 @@
     <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
             <div style="margin: 20px;"><h4>내 정보</h4></div>
-            <table class="table">
+            <table class="table" th:each="memList : ${memberList}">
                 <tr>
                     <th>아이디</th>
-                    <td>ㅁㅁㅁㅁ</td>
+                    <td th:text="${memList.userid}"></td>
                     <th>이름</th>
-                    <td>ㅁㅁㅁㅁㅁ</td>
+                    <td th:text="${memList.name}"></td>
                 </tr>
                 <tr>
                     <th>전화번호</th>
-                    <td>ㅁㅁㅁ</td>
+                    <td th:text="|${memList.tel1}-${memList.tel2}-${memList.tel3}|"></td>
                     <th>이메일</th>
-                    <td></td>
+                    <td th:text="|${memList.mail}@${memList.web}|"></td>
                 </tr>
                 <tr>
                     <th>주소</th>
-                    <td colspan="3"></td>
+                    <td colspan="3" th:text="|${memList.add1} ${memList.add2} ${memList.add3}|"></td>
                 </tr>
                 <tr>
-                    <th>등록일</th>
-                    <td></td>
+                    <th>가입일</th>
+                    <td th:text="${#temporals.format(memList.regdate, 'yyyy년MM월dd일')}"></td>
                 </tr>
             </table>
             <div>최근 구매 항목</div>
@@ -58,10 +58,10 @@
                 <tbody>
                 <tr>
                     <td>1. </td>
-                    <td>ㅁㅁㅁ</td>
-                    <td>ㅁㅁㅁ</td>
-                    <td>ㅁㅁㅁ</td>
-                    <td>ㅁ</td>
+                    <td>텐트</td>
+                    <td>20,000원</td>
+                    <td>2</td>
+                    <td>40,000원</td>
                 </tr>
                 </tbody>
             </table>
