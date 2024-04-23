@@ -2,23 +2,17 @@ package com.example.portfolio.controller;
 
 import com.example.portfolio.dto.CartDTO;
 import com.example.portfolio.dto.DeliveryDTO;
-import com.example.portfolio.entity.BuyEntity;
-import com.example.portfolio.entity.DeliveryEntity;
+import com.example.portfolio.dto.MemberDTO;
 import com.example.portfolio.service.CartService;
 import com.example.portfolio.service.DeliveryService;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.print.PrinterGraphics;
 import java.security.Principal;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @Log4j2
@@ -93,15 +87,26 @@ public class ItemController {
     @PostMapping("/item/delevery_proc")
     public String delivery_proc(DeliveryDTO deliveryDTO, Principal principal){
 
-        deliveryService.saveBuy(deliveryDTO, principal);
-
         deliveryService.saveDelivery(deliveryDTO, principal);
-
 
         return "redirect:/item/buy_item";
     }
     @GetMapping("/item/buy_item")
-    public String buy_item(){
+    public String buy_item(Model model, Principal principal){
+
+        //구매 회원 memberEntity
+        MemberDTO member = deliveryService.findMember(principal);
+
+        model.addAttribute("memberList", member);
+
+        //배송받는 사람 deliveryEntity
+
+        DeliveryDTO delivery = deliveryService.findDelivery(principal);
+
+        model.addAttribute("deliveryList", delivery);
+
+        //구매한 상품 buyEntity
+
 
         return "/item/buy_item";
     }

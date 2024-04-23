@@ -1,7 +1,8 @@
 package com.example.portfolio.dto;
 
+import com.example.portfolio.entity.BuyItemEntity;
+import com.example.portfolio.entity.DeliveryEntity;
 import lombok.*;
-import org.hibernate.type.internal.ParameterizedTypeImpl;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -33,5 +34,31 @@ public class DeliveryDTO {
 
     private LocalDateTime regDate;
 
+    public static DeliveryDTO toDeliveryDTO(DeliveryEntity deliveryEntity){
+        DeliveryDTO deliveryDTO = new DeliveryDTO();
+
+        deliveryDTO.setDeliName(deliveryEntity.getDeliveryName());
+
+        deliveryDTO.setTel1(deliveryEntity.getDeliveryTel().split("-")[0]);
+        deliveryDTO.setTel2(deliveryEntity.getDeliveryTel().split("-")[1]);
+        deliveryDTO.setTel3(deliveryEntity.getDeliveryTel().split("-")[2]);
+
+        deliveryDTO.setAdd1(deliveryEntity.getDeliveryAddress().split("@")[0]);
+        deliveryDTO.setAdd2(deliveryEntity.getDeliveryAddress().split("@")[0]);
+        deliveryDTO.setAdd3(deliveryEntity.getDeliveryAddress().split("@")[0]);
+
+        deliveryDTO.setDeliveryContent(deliveryEntity.getDeliveryContent());
+
+
+        return deliveryDTO;
+    }
+
+    public static DeliveryDTO toBuyDTO(BuyItemEntity buyItemEntity){
+        DeliveryDTO deliveryDTO = new DeliveryDTO();
+
+
+
+        return deliveryDTO;
+    }
 
 }

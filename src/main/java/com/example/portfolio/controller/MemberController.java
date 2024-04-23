@@ -87,7 +87,7 @@ public class MemberController {
             model.addAttribute("list", itemList);
 
         }else {
-            Page<ItemListDTO> itemList = itemService.category_paging(pageable, idx);
+            Page<ItemListDTO> itemList = itemService.categoryPaging(pageable, idx);
             endPage = ((startPage + blockLimit - 1) < itemList.getTotalPages()) ? startPage + blockLimit - 1 : itemList.getTotalPages();
             model.addAttribute("list", itemList);
         }
@@ -111,9 +111,13 @@ public class MemberController {
 
     @GetMapping("/member/mypage")
     public String mypage(Model model, Principal principal){
-//        MemberDTO memberDTO = memberService.findById(idx);
-//
-//        model.addAttribute("view", memberDTO);
+        //회원 정보
+        
+        //구매상품목록 정보
+        
+        //배송지 정보
+        
+        
         return "/item/mypage";
     }
 }

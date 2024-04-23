@@ -1,12 +1,10 @@
 package com.example.portfolio.entity;
 
 import com.example.portfolio.dto.DeliveryDTO;
-import com.example.portfolio.repository.BuyRepository;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.security.Principal;
-import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -24,10 +22,10 @@ public class DeliveryEntity extends DateEntity {
     @Setter
     private String userid;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="buyIdx")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="buy_idx") // 외래 키(Foreign Key)를 buy_table의 idx와 매핑
     @Setter
-    private BuyEntity buyEntity;
+    private BuyListEntity buyListEntity;
 
     @Column
     @Setter
@@ -45,7 +43,7 @@ public class DeliveryEntity extends DateEntity {
     @Setter
     private String deliveryContent;
 
-    public static DeliveryEntity saveDeliveryEntity(DeliveryDTO deliveryDTO, Principal principal, BuyEntity buyEntity){
+    public static DeliveryEntity saveDeliveryEntity(DeliveryDTO deliveryDTO, Principal principal, BuyListEntity buyListEntity){
         String address = deliveryDTO.getAdd1()+"@"+deliveryDTO.getAdd2()+"@"+deliveryDTO.getAdd3();
         String tel = deliveryDTO.getTel1()+"-"+deliveryDTO.getTel2()+"-"+deliveryDTO.getTel3();
 
@@ -53,7 +51,7 @@ public class DeliveryEntity extends DateEntity {
         DeliveryEntity deliveryEntity = new DeliveryEntity();
 
         deliveryEntity.setUserid(principal.getName());
-        deliveryEntity.setBuyEntity(buyEntity);
+        deliveryEntity.setBuyListEntity(buyListEntity);
         deliveryEntity.setDeliveryName(deliveryDTO.getDeliName());
         deliveryEntity.setDeliveryAddress(address);
         deliveryEntity.setDeliveryTel(tel);

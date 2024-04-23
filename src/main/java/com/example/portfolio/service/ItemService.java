@@ -105,7 +105,7 @@ public class ItemService {
     }
 
     @Transactional
-    public Page<ItemListDTO> category_paging(Pageable pageable, Long idx){
+    public Page<ItemListDTO> categoryPaging(Pageable pageable, Long idx){
         int page = pageable.getPageNumber() -1;
         int pageLimit = 8;
 

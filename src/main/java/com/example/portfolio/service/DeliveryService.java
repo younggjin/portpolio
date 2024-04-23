@@ -4,21 +4,14 @@ import com.example.portfolio.dto.CartDTO;
 import com.example.portfolio.dto.DeliveryDTO;
 import com.example.portfolio.dto.MemberDTO;
 //import com.example.portfolio.entity.BuyEntity;
-import com.example.portfolio.entity.BuyEntity;
-import com.example.portfolio.entity.CartEntity;
+import com.example.portfolio.entity.*;
 //import com.example.portfolio.entity.DeliveryEntity;
-import com.example.portfolio.entity.DeliveryEntity;
-import com.example.portfolio.entity.MemberEntity;
-import com.example.portfolio.repository.BuyRepository;
-import com.example.portfolio.repository.CartRepository;
-import com.example.portfolio.repository.DeliveryRepository;
-import com.example.portfolio.repository.MemberRepository;
+import com.example.portfolio.repository.*;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.security.Principal;
-import java.util.List;
 
 @Service
 @Log4j2
@@ -26,13 +19,17 @@ public class DeliveryService {
     private final MemberRepository memberRepository;
     private final CartRepository cartRepository;
     private final DeliveryRepository deliveryRepository;
-    private final BuyRepository buyRepository;
+    private final BuyItemRepository buyItemRepository;
+    private final ItemRepository itemRepository;
+    private final BuyListRepository buyListRepository;
 
-    public DeliveryService(MemberRepository memberRepository, CartRepository cartRepository, DeliveryRepository deliveryRepository, BuyRepository buyRepository) {
+    public DeliveryService(MemberRepository memberRepository, CartRepository cartRepository, DeliveryRepository deliveryRepository, BuyItemRepository buyItemRepository, ItemRepository itemRepository, BuyListRepository buyListRepository) {
         this.memberRepository = memberRepository;
         this.cartRepository = cartRepository;
         this.deliveryRepository = deliveryRepository;
-        this.buyRepository = buyRepository;
+        this.buyItemRepository = buyItemRepository;
+        this.itemRepository = itemRepository;
+        this.buyListRepository = buyListRepository;
     }
 
 
@@ -55,18 +52,40 @@ public class DeliveryService {
             return null;
         }
     }
-    public void saveBuy(DeliveryDTO deliveryDTO, Principal principal){
-        buyRepository.save(BuyEntity.saveBuyEntity(deliveryDTO, principal));
-    }
-    @Transactional
     public void saveDelivery(DeliveryDTO deliveryDTO, Principal principal){
-        BuyEntity buyEntity = buyRepository.findByUserid(principal.getName());
-        deliveryRepository.save(DeliveryEntity.saveDeliveryEntity(deliveryDTO, principal, buyEntity));
+        BuyListEntity buyListEntity = buyListRepository.save(BuyListEntity.buyListEntity(principal));
+
+        BuyListEntity buyListEntity1 = buyListRepository.findById(buyListEntity.getIdx()).orElse(null);
+
+        buyItemRepository.save(BuyItemEntity.saveBuyEntity(deliveryDTO, principal, buyListEntity1));
+        deliveryRepository.save(DeliveryEntity.saveDeliveryEntity(deliveryDTO, principal, buyListEntity1));
 
         for(int a=0; a<deliveryDTO.getCartIdx().size(); a++){
+
+            ItemEntity itemEntity = itemRepository.findById(Long.valueOf(deliveryDTO.getItemIdx().get(a))).orElse(null);
+            int itemQuantity = 0;
+            if (itemEntity != null) {
+                itemQuantity = itemEntity.getItem_quantity();
+            }
+            int deliQuantity = Integer.parseInt(deliveryDTO.getQuantity().get(a));
+            int i = itemQuantity - deliQuantity;
+            if (itemEntity != null) {
+                itemEntity.setItem_quantity(i);
+            }
+            if (itemEntity != null) {
+                itemRepository.save(itemEntity);
+            }
+
             Long delCart = Long.valueOf(deliveryDTO.getCartIdx().get(a));
             cartRepository.deleteById(delCart);
         }
+    }
 
+
+    public DeliveryDTO findDelivery(Principal principal){
+
+        deliveryRepository.findByUserid(principal.getName());
+
+        return null;
     }
 }
